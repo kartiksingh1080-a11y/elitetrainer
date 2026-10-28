@@ -9,272 +9,745 @@
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 body{margin:0;background:#09090b;color:#fff;font-family:-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif}
-button,input{font:inherit}
-.app{max-width:430px;margin:auto;min-height:100vh;background:#121216;padding-bottom:82px}
-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29292f}
-.logo{font-weight:800;letter-spacing:1.5px}.muted{color:#999;font-size:12px;line-height:1.5}
+button,input,select,textarea{font:inherit}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#121216;padding-bottom:82px;position:relative}
+
+/* Header */
+header{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29292f;background:#121216;position:sticky;top:0;z-index:100}
+.logo{font-weight:800;letter-spacing:1.5px;font-size:15px}
+.header-actions{display:flex;align-items:center;gap:10px}
+.user-badge{background:#25252b;padding:5px 10px;border-radius:20px;font-size:11px;color:#aaa;border:1px solid #34343b;cursor:pointer}
+.logout-btn{background:none;border:none;color:#da3633;font-size:11px;font-weight:700;cursor:pointer}
+
 .screen{display:none}.screen.active{display:block}
 .pad{padding:0 20px}
-.top{padding:18px 20px 8px;color:#aaa;display:flex;justify-content:space-between;align-items:center}
-.hero{padding:28px 20px}.hero h1{font-size:32px;line-height:1.1;margin:0 0 12px}
+.top{padding:16px 20px 8px;color:#aaa;display:flex;justify-content:space-between;align-items:center}
+.back-link{cursor:pointer;color:#aaa;font-size:13px;font-weight:600}
+.hero{padding:24px 20px 18px}.hero h1{font-size:30px;line-height:1.1;margin:0 0 10px}
 
-/* Real Input Fields */
-.field{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:14px;color:#fff;margin-top:12px;outline:none;-webkit-user-select:auto;user-select:auto}
+/* Interactive Input Fields */
+.field{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:13px 15px;color:#fff;margin-top:10px;outline:none;-webkit-user-select:auto;user-select:auto;font-size:13px}
 .field:focus{border-color:#fff}
-.search{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:14px;color:#999;margin-top:15px;cursor:pointer}
+.search{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:13px;color:#999;margin-top:14px;cursor:pointer;font-size:13px}
 
-.chips{display:flex;gap:8px;overflow-x:auto;padding:0 20px 18px}.chip{white-space:nowrap;border:1px solid #303038;border-radius:20px;padding:9px 12px;font-size:11px}
-.section{font-size:18px;font-weight:800;margin:22px 0 11px}
-.card,.heroCard{background:#1b1b20;border:1px solid #2d2d34;border-radius:16px;padding:15px;margin:10px 0}
-.trainer{display:flex;gap:12px}.avatar{width:70px;height:70px;border-radius:15px;background:#29292f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0}
-.grow{flex:1}.name{font-size:16px;font-weight:800}.tag,.badge{display:inline-block;background:#25252b;border:1px solid #34343b;border-radius:8px;padding:6px 8px;font-size:10px;margin:7px 4px 0 0}
-.btn{width:100%;padding:13px;border:0;border-radius:11px;background:#fff;color:#111;font-weight:800;margin-top:13px;cursor:pointer}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 20px 16px}.chip{white-space:nowrap;border:1px solid #303038;border-radius:20px;padding:8px 12px;font-size:11px}
+.section{font-size:17px;font-weight:800;margin:22px 0 10px}
+.card{background:#1b1b20;border:1px solid #2d2d34;border-radius:16px;padding:15px;margin:10px 0}
+.trainer{display:flex;gap:12px}.avatar{width:64px;height:64px;border-radius:15px;background:#29292f;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0}
+.grow{flex:1}.name{font-size:16px;font-weight:800}.tag,.badge{display:inline-block;background:#25252b;border:1px solid #34343b;border-radius:8px;padding:5px 8px;font-size:10px;margin:6px 4px 0 0}
+.btn{width:100%;padding:13px;border:0;border-radius:11px;background:#fff;color:#111;font-weight:800;margin-top:12px;cursor:pointer;font-size:13px;text-align:center;text-decoration:none;display:block}
 .btn.dark{background:#25252b;color:#fff;border:1px solid #3a3a42}
-.title{font-size:26px;font-weight:800;margin:20px 0 16px}
+.btn.upi{background:#5f259f;color:#fff}
+.btn-sm{padding:8px 12px;font-size:11px;border-radius:8px;width:auto;display:inline-block;margin-top:0}
+.title{font-size:26px;font-weight:800;margin:18px 0 14px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .metric,.stat{background:#1b1b20;border:1px solid #2d2d34;border-radius:14px;padding:14px}
-.metric b{display:block;font-size:20px;margin-top:7px}
-.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #303038;color:#aaa;font-size:12px}.row b{color:#fff;text-align:right}
+.metric b{display:block;font-size:18px;margin-top:6px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #303038;color:#aaa;font-size:12px}.row b{color:#fff;text-align:right}
 
-.option{background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:14px;margin:8px 0;cursor:pointer;transition:border-color 0.2s}
-.option.selected{border-color:#fff;background:#22222a}
+.option{background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:14px;margin:8px 0;cursor:pointer}
+.option.selected{border-color:#fff;background:#23232b}
 
-.dates{display:flex;gap:8px;overflow-x:auto}.date{min-width:60px;text-align:center;background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:11px 6px;font-size:11px;cursor:pointer}.date.selected{background:#fff;color:#111}
-.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.time{padding:11px 5px;text-align:center;border:1px solid #303038;border-radius:10px;font-size:12px;background:#1b1b20;cursor:pointer}.time.selected{background:#fff;color:#111}
-.success{text-align:center;padding:35px 20px}.check{width:68px;height:68px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:32px;margin:auto auto 16px}
+.dates{display:flex;gap:8px;overflow-x:auto}.date{min-width:60px;text-align:center;background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:10px 6px;font-size:11px;cursor:pointer}.date.selected{background:#fff;color:#111}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.time{padding:10px 4px;text-align:center;border:1px solid #303038;border-radius:10px;font-size:12px;background:#1b1b20;cursor:pointer}.time.selected{background:#fff;color:#111}
+.success{text-align:center;padding:35px 20px}.check{width:64px;height:64px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:30px;margin:auto auto 16px}
 .note{background:#1b1b20;border-radius:14px;padding:14px;color:#bbb;font-size:12px;line-height:1.5}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{display:block;font-size:24px}.stat span{display:block;color:#999;font-size:11px;margin-top:6px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{display:block;font-size:20px}.stat span{display:block;color:#999;font-size:11px;margin-top:5px}
 
-/* Client Layout Fixes */
+/* Client Layout */
 .client{background:#1b1b20;border:1px solid #2d2d34;border-radius:15px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}
-.client .avatar{width:48px;height:48px;flex-shrink:0}
-.client .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.client .avatar{width:46px;height:46px;flex-shrink:0}
+.client .info{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
 .client .info b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .client .info span{display:block;font-size:11px;color:#999}
-.progress{margin-top:4px;height:5px;background:#303038;border-radius:8px;overflow:hidden}.fill{height:100%;background:#fff}
-.open{background:#fff;color:#111;border:0;border-radius:9px;padding:8px 10px;font-weight:800;font-size:10px;cursor:pointer;white-space:nowrap}
+.progress{margin-top:5px;height:5px;background:#303038;border-radius:8px;overflow:hidden}.fill{height:100%;background:#fff}
+.open{background:#fff;color:#111;border:0;border-radius:8px;padding:8px 10px;font-weight:800;font-size:10px;cursor:pointer;white-space:nowrap}
 
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action{background:#1b1b20;border:1px solid #2d2d34;border-radius:14px;padding:16px;font-size:13px}.action span{display:block;color:#999;font-size:10px;margin-top:6px}
-.cover{height:190px;background:linear-gradient(135deg,#4b4b52,#18181c);display:flex;align-items:end;padding:20px}.profileAvatar{width:86px;height:86px;border-radius:18px;background:#29292e;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold}
-.profileContent{padding:20px}.profileName{font-size:26px;font-weight:800}.profileMeta{color:#aaa;font-size:13px;margin:8px 0 18px}.profileStats{display:flex;gap:8px}.profileStat{flex:1;background:#1b1b20;border-radius:12px;padding:14px;text-align:center}.profileStat b{display:block;font-size:19px}.profileStat span{font-size:10px;color:#999}
-.book{position:sticky;bottom:90px;margin:20px;padding:15px;background:#fff;color:#111;border:0;border-radius:13px;width:calc(100% - 40px);font-weight:800;font-size:15px;cursor:pointer}
+.cover{height:170px;background:linear-gradient(135deg,#4b4b52,#18181c);display:flex;align-items:end;padding:18px}.profileAvatar{width:80px;height:80px;border-radius:16px;background:#29292e;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold}
+.profileContent{padding:18px}.profileName{font-size:24px;font-weight:800}.profileMeta{color:#aaa;font-size:12px;margin:6px 0 16px}.profileStats{display:flex;gap:8px}.profileStat{flex:1;background:#1b1b20;border-radius:12px;padding:12px;text-align:center}.profileStat b{display:block;font-size:18px}.profileStat span{font-size:10px;color:#999}
+.book{position:sticky;bottom:90px;margin:20px;padding:14px;background:#fff;color:#111;border:0;border-radius:13px;width:calc(100% - 40px);font-weight:800;font-size:14px;cursor:pointer}
 .rolebar{display:flex;background:#1b1b20;border-radius:12px;padding:4px;margin-bottom:18px}.role{flex:1;text-align:center;padding:10px;font-size:11px;color:#999;cursor:pointer;border-radius:9px}.role.active{background:#fff;color:#111;font-weight:800}
-.upload{border:1px dashed #444;border-radius:13px;padding:16px;color:#999;font-size:11px;text-align:center;margin-top:8px}
 
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#17171b;border-top:1px solid #2b2b30;display:flex;justify-content:space-around;padding:11px 3px 14px;z-index:10}
+/* Document Upload Box */
+.upload-box{border:1px dashed #4f4f5a;border-radius:13px;padding:16px;color:#bbb;font-size:12px;text-align:center;margin-top:10px;cursor:pointer;background:#16161b}
+.upload-box.has-file{border-color:#22c55e;color:#22c55e}
+
+/* Modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
+.modal-overlay.active{display:flex}
+.modal{background:#1b1b20;border:1px solid #303038;border-radius:16px;padding:20px;width:100%;max-width:380px}
+.modal h3{margin:0 0 12px;font-size:18px}
+
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#17171b;border-top:1px solid #2b2b30;display:flex;justify-content:space-around;padding:10px 3px 12px;z-index:10}
 nav button{background:none;border:0;color:#999;font-size:10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
 nav button.active{color:#fff;font-weight:800}
-.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 16px;border-radius:12px;font-size:12px;font-weight:700;z-index:20;display:none}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:12px;font-size:12px;font-weight:700;z-index:250;display:none;box-shadow:0 4px 14px rgba(0,0,0,0.4)}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div class="logo">ELITETRAINER</div><div class="muted">Premium Fitness Network</div></header>
 
-<section id="login" class="screen active">
+<header id="appHeader">
+  <div class="logo">ELITETRAINER</div>
+  <div class="header-actions">
+    <div class="user-badge" id="userBadge" onclick="show('signup')">👤 Sign In / Register</div>
+    <button class="logout-btn" id="logoutBtn" style="display:none" onclick="logout()">Exit</button>
+  </div>
+</header>
+
+<!-- SCREEN: SIGNUP & CREDENTIALS ONBOARDING -->
+<section id="signup" class="screen active">
 <div class="pad">
-<div style="padding-top:35px;color:#999;font-size:11px;letter-spacing:1px">WELCOME TO YOUR PREMIUM FITNESS NETWORK</div>
-<div class="title">Choose your<br>experience.</div>
-<div class="muted">Connect with verified personal trainers or build your professional trainer profile.</div>
-<div class="option" onclick="show('signup')">👤 &nbsp; <b>I'm a Client</b><div class="muted">Find &amp; book your personal trainer</div></div>
-<div class="option" onclick="show('signup')">🏋️ &nbsp; <b>I'm a Trainer</b><div class="muted">Build your profile &amp; manage clients</div></div>
-<div style="display:flex;align-items:center;gap:10px;color:#666;font-size:11px;margin:27px 0 16px"><span style="flex:1;height:1px;background:#2b2b31"></span>OR LOGIN WITH EMAIL<span style="flex:1;height:1px;background:#2b2b31"></span></div>
-<input type="email" class="field" placeholder="Email address" id="loginEmail">
-<input type="password" class="field" placeholder="Password" id="loginPassword">
-<button class="btn" onclick="show('home')">LOGIN</button>
-<div style="text-align:center;color:#666;font-size:10px;margin-top:20px">🔒 Protected local storage enabled</div>
-<div style="text-align:center;margin-top:15px"><button class="btn dark" onclick="show('signup')">CREATE ACCOUNT</button></div>
-</div></section>
+  <div style="padding-top:20px;color:#999;font-size:11px;letter-spacing:1px">PREMIUM FITNESS NETWORK</div>
+  <div class="title">Create Profile</div>
+  <div class="muted">Join as a client looking for elite coaching, or submit your professional trainer credentials.</div>
+  
+  <div class="rolebar" style="margin-top:16px">
+    <div class="role active" id="clientRole" onclick="setRole('client')">CLIENT ACCOUNT</div>
+    <div class="role" id="trainerRole" onclick="setRole('trainer')">TRAINER ONBOARDING</div>
+  </div>
 
-<section id="signup" class="screen">
-<div class="pad">
-<div class="top" onclick="show('login')" style="cursor:pointer">‹ &nbsp; Back to Login</div>
-<div class="title">Build your profile.</div>
-<div class="rolebar"><div class="role active" id="clientRole" onclick="setRole('client')">CLIENT</div><div class="role" id="trainerRole" onclick="setRole('trainer')">TRAINER</div></div>
-<div id="signupForm"></div>
-</div></section>
+  <!-- Client Signup Form -->
+  <div id="clientSignupForm">
+    <input type="text" class="field" placeholder="Full Name" id="cName" value="Rahul Kapoor">
+    <input type="email" class="field" placeholder="Email Address" id="cEmail" value="rahul@example.com">
+    <input type="tel" class="field" placeholder="Phone Number" id="cPhone" value="+91 98200 12345">
+    <input type="password" class="field" placeholder="Create Password" id="cPass" value="••••••••">
+    <div class="section">Fitness Goal</div>
+    <select class="field" id="cGoal">
+      <option value="Fat Loss & Transformation">Fat Loss & Transformation</option>
+      <option value="Muscle Hypertrophy & Strength">Muscle Hypertrophy & Strength</option>
+      <option value="Athletic Conditioning">Athletic Conditioning</option>
+    </select>
+    <button class="btn" onclick="registerClient()">CREATE CLIENT ACCOUNT</button>
+  </div>
 
+  <!-- Trainer Credentials Submission Form -->
+  <div id="trainerSignupForm" style="display:none">
+    <input type="text" class="field" placeholder="Professional / Legal Name" id="tName">
+    <input type="email" class="field" placeholder="Work Email" id="tEmail">
+    <input type="tel" class="field" placeholder="Contact Mobile" id="tPhone">
+    <input type="password" class="field" placeholder="Portal Password" id="tPass">
+    
+    <div class="section">Professional Qualifications</div>
+    <input type="text" class="field" placeholder="Years of Coaching Experience (e.g. 8+ Years)" id="tExp">
+    <input type="text" class="field" placeholder="Primary Certifications (e.g. ACE, ACSM, K11, ISSA)" id="tCerts">
+    <input type="text" class="field" placeholder="Specializations (e.g. Hypertrophy, Rehab, HIIT)" id="tSpecs">
+
+    <div class="section">Verification Proof</div>
+    <div class="upload-box" id="uploadTrigger" onclick="document.getElementById('certFile').click()">
+      <span id="uploadLabel">📄 Tap to Upload Certification / ID Document</span>
+      <input type="file" id="certFile" style="display:none" onchange="fileSelected(this)">
+    </div>
+    
+    <input type="text" class="field" placeholder="Elite / Celebrity Coaching Experience (Optional)" id="tElite">
+    <button class="btn" onclick="submitTrainerApplication()">SUBMIT CREDENTIALS FOR REVIEW</button>
+    <div style="text-align:center;color:#777;font-size:10px;margin-top:12px">All trainers require manual verification before appearing in search.</div>
+  </div>
+</div>
+</section>
+
+<!-- SCREEN: HOME / SEARCH -->
 <section id="home" class="screen">
-<div class="hero"><h1>Find a trainer<br>who fits your goals.</h1><div class="muted">Connect with verified fitness professionals.</div><div class="search" onclick="show('find')">⌕ &nbsp; Search trainer, specialty or goal</div></div>
-<div class="chips"><div class="chip">📍 Near me</div><div class="chip">🏅 Certified</div><div class="chip">⭐ Top rated</div><div class="chip">Online</div></div>
-<div class="pad"><div class="section">Featured Trainers</div>
-<div class="card trainer"><div class="avatar">AR</div><div class="grow"><div class="name">Aarav Rao ✓</div><div class="muted">Mumbai · 12+ years · 4.9 ★</div><span class="tag">Celebrity Training</span><span class="tag">Strength</span><button class="btn" onclick="show('profile')">VIEW PROFILE</button></div></div>
-</div></section>
-
-<section id="find" class="screen"><div class="pad"><div class="title">Find Trainers</div><input type="text" class="field" placeholder="⌕ Search trainer, goal or specialty"><div class="chips" style="padding:15px 0"><div class="chip">Certified</div><div class="chip">Celebrity</div><div class="chip">Budget</div><div class="chip">Online</div></div><div class="section">Top Matches</div>
-<div class="card trainer"><div class="avatar">AR</div><div class="grow"><div class="name">Aarav Rao ✓</div><div class="muted">Mumbai · Strength · Transformation</div><span class="tag">✓ Verified</span><span class="tag">12+ Years</span><button class="btn" onclick="show('profile')">VIEW PROFILE</button></div></div>
-<div class="card trainer"><div class="avatar">NS</div><div class="grow"><div class="name">Neha Shah ✓</div><div class="muted">Mumbai · Transformation · Nutrition</div><span class="tag">Certified</span><span class="tag">4.8 ★</span></div></div>
-</div></section>
-
-<section id="profile" class="screen"><div class="top" onclick="show('home')" style="cursor:pointer">‹ &nbsp; Back</div><div class="cover"><div class="profileAvatar">AR</div></div><div class="profileContent">
-<div class="profileName">Aarav Rao ✓</div><div class="profileMeta">Mumbai · 12+ years experience · 4.9 ★</div>
-<div><span class="badge">🏅 Certified</span><span class="badge">✓ Verified Trainer</span><span class="badge">⭐ Elite Experience</span></div>
-<div class="section">About</div><div class="muted">Premium personal trainer focused on strength, transformation and high-performance training.</div>
-<div class="section">Experience</div><div class="profileStats"><div class="profileStat"><b>12+</b><span>Years</span></div><div class="profileStat"><b>2K+</b><span>Sessions</span></div><div class="profileStat"><b>4.9</b><span>Rating</span></div></div>
-<div class="section">Packages</div>
-<div class="option selected package-opt" onclick="selectPkg(this, '1-on-1 Personal Training', '12 Sessions', '₹30,000')"><b>1-on-1 Personal Training</b><div class="muted">12 sessions · ₹30,000</div></div>
-<div class="option package-opt" onclick="selectPkg(this, 'Premium Transformation', '24 Sessions', '₹54,000')"><b>Premium Transformation</b><div class="muted">24 sessions · ₹54,000</div></div>
-</div><button class="book" onclick="show('booking')">BOOK A PERSONAL SESSION</button></section>
-
-<section id="booking" class="screen"><div class="pad"><div class="top" onclick="show('profile')" style="cursor:pointer">‹ &nbsp; Back</div>
-<div class="trainer"><div class="avatar">AR</div><div><div class="name">Aarav Rao ✓</div><div class="muted">Certified · 4.9 ★</div></div></div>
-<div class="title">Choose your session</div>
-<div class="section">Date</div>
-<div class="dates">
-  <div class="date selected" onclick="pickDate(this)">08<br>Tue</div>
-  <div class="date" onclick="pickDate(this)">09<br>Wed</div>
-  <div class="date" onclick="pickDate(this)">10<br>Thu</div>
-  <div class="date" onclick="pickDate(this)">11<br>Fri</div>
-  <div class="date" onclick="pickDate(this)">12<br>Sat</div>
+<div class="hero">
+  <h1>Book verified<br>personal trainers.</h1>
+  <div class="muted">1-on-1 private coaching. 10% protected escrow booking.</div>
+  <div class="search" onclick="show('find')">⌕ &nbsp; Search verified coaches, goals, or areas</div>
 </div>
-<div class="section">Available time</div>
-<div class="times">
-  <div class="time" onclick="pickTime(this)">6:00 AM</div>
-  <div class="time selected" onclick="pickTime(this)">7:00 AM</div>
-  <div class="time" onclick="pickTime(this)">8:00 AM</div>
-  <div class="time" onclick="pickTime(this)">5:00 PM</div>
-  <div class="time" onclick="pickTime(this)">6:00 PM</div>
-  <div class="time" onclick="pickTime(this)">7:00 PM</div>
+<div class="chips"><div class="chip">📍 Mumbai</div><div class="chip">🏅 Certified</div><div class="chip">⭐ Top Rated</div><div class="chip">Celebrity Coach</div></div>
+<div class="pad">
+  <div class="section">Available Coaches</div>
+  <div id="coachesList"></div>
 </div>
-<div class="card"><b>Booking Summary</b>
-  <div class="row"><span>Trainer</span><b>Aarav Rao</b></div>
-  <div class="row"><span>Package</span><b id="sumPackage">1-on-1 Personal Training</b></div>
-  <div class="row"><span>Date &amp; time</span><b id="sumDateTime">08 Tue · 7:00 AM</b></div>
-  <div class="row"><span>Deposit</span><b>₹2,500</b></div>
-  <button class="btn" onclick="show('payment')">CONFIRM &amp; CONTINUE TO PAYMENT</button>
+</section>
+
+<!-- SCREEN: FIND / FILTERS -->
+<section id="find" class="screen">
+<div class="pad">
+  <div class="title">Find Coaches</div>
+  <input type="text" class="field" placeholder="⌕ Search trainer name, certification or goal" oninput="filterCoaches(this.value)">
+  <div class="chips" style="padding:15px 0"><div class="chip">Strength</div><div class="chip">Transformation</div><div class="chip">Nutrition</div></div>
+  <div id="searchCoachesList"></div>
 </div>
-</div></section>
+</section>
 
-<section id="payment" class="screen"><div class="pad"><div class="top" onclick="show('booking')" style="cursor:pointer">‹ &nbsp; Back</div><div class="title">Secure Checkout</div>
-<div class="card"><b>Booking Summary</b>
-  <div class="row"><span>Trainer</span><b>Aarav Rao ✓</b></div>
-  <div class="row"><span>Package</span><b id="payPackage">1-on-1 Personal Training</b></div>
-  <div class="row"><span>Date &amp; Time</span><b id="payDateTime">08 Tue · 7:00 AM</b></div>
-  <div class="row"><span>Total Due</span><b>₹2,500</b></div>
-</div>
-<div class="card"><b>Payment Method</b>
-  <div class="option selected pay-opt" onclick="selectPay(this)">▣ &nbsp; <b>UPI</b><div class="muted">Google Pay · PhonePe · Paytm</div></div>
-  <div class="option pay-opt" onclick="selectPay(this)">▤ &nbsp; <b>Card</b><div class="muted">Credit / Debit Card</div></div>
-</div>
-<button class="btn" onclick="show('confirmed')">PAY ₹2,500 &amp; CONFIRM BOOKING</button>
-</div></section>
-
-<section id="confirmed" class="screen"><div class="success"><div class="check">✓</div><h1>Booking Confirmed</h1><div class="muted">Your session with <b style="color:#fff">Aarav Rao</b> is confirmed.</div></div>
-<div class="pad"><button class="btn" onclick="show('board')">OPEN MY CLIENT BOARD</button></div></section>
-
-<section id="board" class="screen"><div class="pad"><div class="title">My Client Board</div><div class="muted">Private training dashboard</div>
-<div class="card"><b>Transformation Goal</b><div class="muted">Strength &amp; body transformation</div><div style="height:7px;background:#303038;border-radius:8px;margin-top:12px"><div style="height:100%;width:72%;background:#fff;border-radius:8px"></div></div><div class="muted" style="margin-top:7px">72% overall progress</div></div>
-<div class="grid"><div class="metric">🎯<b>Goals</b><span class="muted">3 targets</span></div><div class="metric">🏋️<b>Workout</b><span class="muted">Today</span></div><div class="metric">🍎<b>Nutrition</b><span class="muted">Daily</span></div><div class="metric">📊<b>Progress</b><span class="muted">Stats</span></div></div>
-<div class="section">Trainer Notes</div><div class="note">“Consistency improved. Keep focus on recovery this week.”</div>
-</div></section>
-
-<section id="trainer" class="screen"><div class="pad">
-<div class="top" style="padding:14px 0"><b>ELITETRAINER</b><span class="muted">Trainer Dashboard</span></div>
-<div class="title" style="margin-top:0">Aarav Rao 👋</div>
-<div class="stats"><div class="stat"><b>18</b><span>Active Clients</span></div><div class="stat"><b>7</b><span>Today's Sessions</span></div><div class="stat"><b>4.9 ★</b><span>Rating</span></div><div class="stat"><b>₹84K</b><span>This Month</span></div></div>
-
-<div class="section">Today's Clients</div>
-<div class="client">
-  <div class="avatar">RK</div>
-  <div class="info">
-    <b>Rahul Kapoor</b>
-    <span>Transformation · Next: 7:00 AM</span>
-    <div class="progress"><div class="fill" style="width:72%"></div></div>
+<!-- SCREEN: TRAINER PROFILE VIEW -->
+<section id="profile" class="screen">
+<div class="top"><span class="back-link" onclick="show('home')">‹ Back</span></div>
+<div class="cover"><div class="profileAvatar" id="profAvatar">AR</div></div>
+<div class="profileContent">
+  <div class="profileName" id="profName">Aarav Rao ✓</div>
+  <div class="profileMeta" id="profMeta">Mumbai · 12+ years · 4.9 ★</div>
+  <div id="profBadges"><span class="badge">🏅 Certified</span><span class="badge">✓ Verified</span><span class="badge">⭐ Elite</span></div>
+  <div class="section">Credentials &amp; Certifications</div>
+  <div class="note" id="profCerts">ACE Certified Personal Trainer · ISSA Specialist in Sports Nutrition · 12+ Years Industry Experience.</div>
+  
+  <div class="section">Select Training Plan</div>
+  <div class="option selected pkg-opt" onclick="selectPkg(this, '1-on-1 Personal Training', 2500)">
+    <b>1-on-1 Personal Training</b>
+    <div class="muted">Slot Deposit: ₹2,500 (12 Sessions Plan)</div>
   </div>
-  <button class="open" onclick="show('board')">OPEN BOARD</button>
-</div>
-<div class="client">
-  <div class="avatar">AS</div>
-  <div class="info">
-    <b>Ananya Shah</b>
-    <span>Strength · Next: 8:00 AM</span>
-    <div class="progress"><div class="fill" style="width:58%"></div></div>
+  <div class="option pkg-opt" onclick="selectPkg(this, 'Elite Transformation Program', 4500)">
+    <b>Elite Transformation Program</b>
+    <div class="muted">Slot Deposit: ₹4,500 (24 Sessions Plan)</div>
   </div>
-  <button class="open" onclick="show('board')">OPEN BOARD</button>
 </div>
-<div class="client">
-  <div class="avatar">VK</div>
-  <div class="info">
-    <b>Vikram Khanna</b>
-    <span>Performance · Next: 6:00 PM</span>
-    <div class="progress"><div class="fill" style="width:84%"></div></div>
+<button class="book" onclick="show('booking_form')">CHOOSE SESSION TIME</button>
+</section>
+
+<!-- SCREEN: SCHEDULER -->
+<section id="booking_form" class="screen">
+<div class="pad">
+  <div class="top"><span class="back-link" onclick="show('profile')">‹ Back</span></div>
+  <div class="title" style="margin-top:5px">Select Slot</div>
+  
+  <div class="section">Date</div>
+  <div class="dates">
+    <div class="date selected" onclick="pickDate(this)">08<br>Tue</div>
+    <div class="date" onclick="pickDate(this)">09<br>Wed</div>
+    <div class="date" onclick="pickDate(this)">10<br>Thu</div>
+    <div class="date" onclick="pickDate(this)">11<br>Fri</div>
+    <div class="date" onclick="pickDate(this)">12<br>Sat</div>
   </div>
-  <button class="open" onclick="show('board')">OPEN BOARD</button>
+
+  <div class="section">Available Hours</div>
+  <div class="times">
+    <div class="time" onclick="pickTime(this)">6:00 AM</div>
+    <div class="time selected" onclick="pickTime(this)">7:00 AM</div>
+    <div class="time" onclick="pickTime(this)">8:00 AM</div>
+    <div class="time" onclick="pickTime(this)">5:00 PM</div>
+    <div class="time" onclick="pickTime(this)">6:00 PM</div>
+    <div class="time" onclick="pickTime(this)">7:00 PM</div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <b>Booking Breakdown</b>
+    <div class="row"><span>Coach</span><b id="sumCoach">Aarav Rao</b></div>
+    <div class="row"><span>Package</span><b id="sumPkg">1-on-1 Personal Training</b></div>
+    <div class="row"><span>Schedule</span><b id="sumSchedule">08 Tue · 7:00 AM</b></div>
+    <div class="row"><span>Trainer Session Fee (90%)</span><b id="sumTrainerCut">₹2,250</b></div>
+    <div class="row"><span>Platform &amp; Escrow Fee (10%)</span><b id="sumPlatformCut" style="color:#22c55e">₹250</b></div>
+    <div class="row" style="border-top:1px dashed #444;margin-top:4px"><span style="font-weight:700">Total Deposit</span><b id="sumDeposit" style="font-size:14px">₹2,500</b></div>
+    <button class="btn" onclick="show('payment')">CONTINUE TO CHECKOUT</button>
+  </div>
 </div>
-</div></section>
+</section>
 
-<section id="admin" class="screen"><div class="pad"><div class="title">Admin Verification</div><div class="muted">Review trainer applications.</div><div class="card"><div class="name">Aarav Rao</div><span class="tag">PENDING REVIEW</span><div class="row"><span>Certification</span><b>Uploaded ✓</b></div><div class="row"><span>Experience</span><b>12+ years</b></div><button class="btn" onclick="toast('Trainer verified ✓')">APPROVE &amp; VERIFY</button><button class="btn dark" onclick="toast('Requested more documents')">REQUEST MORE</button></div></div></section>
+<!-- SCREEN: CHECKOUT & 10% PLATFORM SPLIT -->
+<section id="payment" class="screen">
+<div class="pad">
+  <div class="top"><span class="back-link" onclick="show('booking_form')">‹ Back</span></div>
+  <div class="title" style="margin-top:5px">Secure Checkout</div>
+  
+  <div class="card">
+    <b>Payment Split &amp; Escrow</b>
+    <div class="row"><span>Trainer Share (90%)</span><b id="payTrainerCut">₹2,250</b></div>
+    <div class="row"><span>Platform Fee (10% to Owner)</span><b id="payPlatformCut" style="color:#22c55e">₹250</b></div>
+    <div class="row" style="font-size:14px;padding-top:10px"><span>Total Amount</span><b id="payTotal">₹2,500</b></div>
+  </div>
 
+  <div class="section">Payment Method</div>
+  
+  <a id="upiDeepLink" href="upi://pay?pa=elitetrainer@upi&pn=EliteTrainer&am=2500&cu=INR&tn=EliteTrainer%20Booking" class="btn upi">
+    ⚡ Pay with UPI App (GPay / PhonePe / Paytm)
+  </a>
+
+  <button class="btn" style="background:#22c55e;color:#fff" onclick="processPayment('UPI Instant')">
+    ✓ Complete &amp; Verify Payment
+  </button>
+  
+  <button class="btn dark" onclick="processPayment('Direct Card / Counter')">
+    Pay at Gym Desk
+  </button>
+</div>
+</section>
+
+<!-- SCREEN: MY BOOKINGS (CLIENT) -->
+<section id="my_bookings" class="screen">
+<div class="pad">
+  <div class="title">My Bookings</div>
+  <div class="muted">All scheduled training sessions and fee receipts.</div>
+  <div id="bookingsContainer" style="margin-top:15px"></div>
+</div>
+</section>
+
+<!-- SCREEN: CLIENT WORKSPACE BOARD -->
+<section id="board" class="screen">
+<div class="pad">
+  <div class="title">Client Dashboard</div>
+  <div class="muted" id="boardSubtitle">Private Client Workspace</div>
+  
+  <div class="card">
+    <b>Transformation Milestone</b>
+    <div class="muted" id="boardGoalText">Fat Loss &amp; Conditioning</div>
+    <div style="height:7px;background:#303038;border-radius:8px;margin-top:12px">
+      <div style="height:100%;width:72%;background:#fff;border-radius:8px"></div>
+    </div>
+    <div class="muted" style="margin-top:7px">72% adherence rate</div>
+  </div>
+
+  <div class="grid">
+    <div class="metric">🎯<b>Targets</b><span class="muted">3 Active</span></div>
+    <div class="metric">🏋️<b>Workout</b><span class="muted">Today's Routine</span></div>
+    <div class="metric">🍎<b>Nutrition</b><span class="muted">Macros Synced</span></div>
+    <div class="metric">📊<b>Progress</b><span class="muted">Weekly Check</span></div>
+  </div>
+  
+  <div class="section">Next Scheduled Session</div>
+  <div class="note" id="boardNextSession">No upcoming sessions. Browse trainers to book.</div>
+</div>
+</section>
+
+<!-- SCREEN: TRAINER PORTAL -->
+<section id="trainer" class="screen">
+<div class="pad">
+  <div class="top" style="padding:14px 0"><b>ELITETRAINER</b><span class="muted">Trainer Portal</span></div>
+  <div class="title" style="margin-top:0" id="trainerGreeting">Coach Portal 👋</div>
+  
+  <div class="stats">
+    <div class="stat"><b id="statClientCount">3</b><span>Clients</span></div>
+    <div class="stat"><b>₹22,500</b><span>Net Payout (90%)</span></div>
+  </div>
+
+  <div class="section" style="display:flex;justify-content:space-between;align-items:center">
+    <span>My Client Roster</span>
+    <button class="btn btn-sm" onclick="openAddClientModal()">+ Add Client</button>
+  </div>
+  
+  <div id="trainerClientsList"></div>
+</div>
+</section>
+
+<!-- SCREEN: ADMIN CONSOLE (VERIFICATION & 10% PLATFORM REVENUE) -->
+<section id="admin" class="screen">
+<div class="pad">
+  <div class="title">Admin Platform</div>
+  <div class="muted">Platform Commission (10%) &amp; Trainer Credential Approvals.</div>
+  
+  <!-- 10% COMMISSION TRACKER -->
+  <div class="card" style="border-color:#22c55e">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#22c55e">Platform Revenue (10% Cut)</b>
+      <span class="badge" style="background:#153d22;color:#22c55e;border:none">Active</span>
+    </div>
+    <div style="font-size:26px;font-weight:800;margin:12px 0 6px" id="adminTotalCommission">₹250</div>
+    <div class="row"><span>Total Gross Bookings</span><b id="adminGrossVolume">₹2,500</b></div>
+    <div class="row"><span>Trainer Payouts (90%)</span><b id="adminTrainerPayouts">₹2,250</b></div>
+  </div>
+
+  <div class="section">Pending Trainer Credential Applications</div>
+  <div id="adminApplicationsList"></div>
+</div>
+</section>
+
+<!-- MODAL: ADD CLIENT (TRAINER) -->
+<div class="modal-overlay" id="addClientModal">
+  <div class="modal">
+    <h3>Add New Client</h3>
+    <input type="text" class="field" placeholder="Client Name" id="newClientName">
+    <input type="text" class="field" placeholder="Goal (e.g. Muscle Gain)" id="newClientGoal">
+    <input type="text" class="field" placeholder="Slot Time (e.g. 8:00 AM)" id="newClientTime">
+    <div class="grid" style="margin-top:14px">
+      <button class="btn dark" onclick="closeAddClientModal()">Cancel</button>
+      <button class="btn" onclick="saveNewClient()">Save Client</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAVIGATION -->
 <nav id="bottomNav">
   <button onclick="show('home')" data-target="home">⌂<span>Home</span></button>
   <button onclick="show('find')" data-target="find">⌕<span>Find</span></button>
-  <button onclick="show('booking')" data-target="booking">◷<span>Bookings</span></button>
+  <button onclick="show('my_bookings')" data-target="my_bookings">◷<span>Bookings</span></button>
   <button onclick="show('board')" data-target="board">▣<span>Board</span></button>
   <button onclick="show('trainer')" data-target="trainer">♙<span>Trainer</span></button>
   <button onclick="show('admin')" data-target="admin">✓<span>Admin</span></button>
 </nav>
+
 <div id="toast" class="toast"></div>
 </div>
 
 <script>
-// Register Service Worker for 100% Offline Support
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js').catch(() => {});
-}
+// Local Storage Initial State
+let currentUser = JSON.parse(localStorage.getItem('et_user')) || null;
+let uploadedFileName = "";
 
-let booking = { date: '08 Tue', time: '7:00 AM', pkg: '1-on-1 Personal Training' };
+let trainers = JSON.parse(localStorage.getItem('et_trainers')) || [
+  { id: 1, name: 'Aarav Rao', meta: 'Mumbai · 12+ years', rating: '4.9 ★', specs: 'Strength, Transformation', certs: 'ACE Certified Personal Trainer, ISSA Nutritionist', elite: 'Trained Bollywood celebrities & athletes', verified: true },
+  { id: 2, name: 'Neha Shah', meta: 'Mumbai · 8+ years', rating: '4.8 ★', specs: 'Transformation, Functional Training', certs: 'K11 Master Trainer, ACSM Certified', elite: 'Marathon conditioning coach', verified: true }
+];
 
+let pendingApplications = JSON.parse(localStorage.getItem('et_pending_trainers')) || [
+  { id: 101, name: 'Karan Mehra', email: 'karan@gym.com', exp: '6 years', certs: 'K11 Fitness Academy Diploma', file: 'K11_Certificate.pdf', specs: 'Weight Loss, Rehab', elite: 'State Powerlifting Coach' }
+];
+
+let bookings = JSON.parse(localStorage.getItem('et_bookings')) || [
+  { id: 501, trainer: 'Aarav Rao', pkg: '1-on-1 Personal Training', schedule: '08 Tue · 7:00 AM', total: 2500, trainerShare: 2250, platformFee: 250, status: 'Confirmed ✓', method: 'UPI' }
+];
+
+let clients = JSON.parse(localStorage.getItem('et_clients')) || [
+  { id: 1, name: 'Rahul Kapoor', goal: 'Transformation', time: '7:00 AM', progress: 72 },
+  { id: 2, name: 'Ananya Shah', goal: 'Strength', time: '8:00 AM', progress: 58 }
+];
+
+let activeBooking = {
+  coach: 'Aarav Rao',
+  pkg: '1-on-1 Personal Training',
+  deposit: 2500,
+  date: '08 Tue',
+  time: '7:00 AM'
+};
+
+// Navigation
 function show(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(id);
   if(target) target.classList.add('active');
   window.scrollTo(0,0);
 
-  // Sync Bottom Navigation highlight
   document.querySelectorAll('#bottomNav button').forEach(b => {
     b.classList.toggle('active', b.getAttribute('data-target') === id);
   });
+
+  if(id === 'home') renderCoaches();
+  if(id === 'find') renderCoaches(true);
+  if(id === 'my_bookings') renderBookings();
+  if(id === 'admin') renderAdmin();
+  if(id === 'trainer') renderTrainerClients();
+  if(id === 'board') renderBoard();
 }
 
+// Role Toggle in Signup
 function setRole(r){
-  document.getElementById('clientRole').className='role '+(r==='client'?'active':'');
-  document.getElementById('trainerRole').className='role '+(r==='trainer'?'active':'');
-  document.getElementById('signupForm').innerHTML = r === 'client' ?
-    `<input type="text" class="field" placeholder="Full name"><input type="email" class="field" placeholder="Email address"><input type="password" class="field" placeholder="Password"><button class="btn" onclick="show('home')">CREATE CLIENT ACCOUNT</button>` :
-    `<input type="text" class="field" placeholder="Professional name"><input type="text" class="field" placeholder="Years of experience"><input type="text" class="field" placeholder="Certifications"><button class="btn" onclick="show('trainer')">SUBMIT FOR VERIFICATION</button>`;
+  document.getElementById('clientRole').className = 'role ' + (r === 'client' ? 'active' : '');
+  document.getElementById('trainerRole').className = 'role ' + (r === 'trainer' ? 'active' : '');
+  document.getElementById('clientSignupForm').style.display = r === 'client' ? 'block' : 'none';
+  document.getElementById('trainerSignupForm').style.display = r === 'trainer' ? 'block' : 'none';
 }
 
-function selectPkg(el, name, sessions, price){
-  document.querySelectorAll('.package-opt').forEach(o => o.classList.remove('selected'));
+function fileSelected(input){
+  if(input.files && input.files[0]){
+    uploadedFileName = input.files[0].name;
+    const box = document.getElementById('uploadTrigger');
+    box.classList.add('has-file');
+    document.getElementById('uploadLabel').textContent = '✓ Uploaded: ' + uploadedFileName;
+  }
+}
+
+// Register Client
+function registerClient(){
+  const name = document.getElementById('cName').value.trim() || 'Client';
+  const email = document.getElementById('cEmail').value.trim();
+  const goal = document.getElementById('cGoal').value;
+  currentUser = { name, email, role: 'client', goal };
+  localStorage.setItem('et_user', JSON.stringify(currentUser));
+  updateUserUI();
+  toast('Welcome, ' + name + '!');
+  show('home');
+}
+
+// Submit Trainer Credentials
+function submitTrainerApplication(){
+  const name = document.getElementById('tName').value.trim();
+  const email = document.getElementById('tEmail').value.trim();
+  const exp = document.getElementById('tExp').value.trim();
+  const certs = document.getElementById('tCerts').value.trim();
+  const specs = document.getElementById('tSpecs').value.trim();
+  const elite = document.getElementById('tElite').value.trim();
+
+  if(!name || !certs){
+    toast('Please enter name and certifications');
+    return;
+  }
+
+  const application = {
+    id: Date.now(),
+    name,
+    email,
+    exp: exp || '3+ years',
+    certs: certs,
+    specs: specs || 'General Fitness',
+    elite: elite || 'None listed',
+    file: uploadedFileName || 'Credentials_Doc.pdf'
+  };
+
+  pendingApplications.push(application);
+  localStorage.setItem('et_pending_trainers', JSON.stringify(pendingApplications));
+  toast('Credentials submitted for Admin verification ✓');
+  
+  // Clear form
+  document.getElementById('tName').value = '';
+  document.getElementById('tCerts').value = '';
+  document.getElementById('uploadLabel').textContent = '📄 Tap to Upload Certification / ID Document';
+  document.getElementById('uploadTrigger').classList.remove('has-file');
+
+  show('admin');
+}
+
+function updateUserUI(){
+  const badge = document.getElementById('userBadge');
+  const logoutBtn = document.getElementById('logoutBtn');
+  if(currentUser){
+    badge.textContent = '👤 ' + currentUser.name.split(' ')[0] + ' (' + currentUser.role + ')';
+    logoutBtn.style.display = 'block';
+  } else {
+    badge.textContent = '👤 Sign In / Register';
+    logoutBtn.style.display = 'none';
+  }
+}
+
+function logout(){
+  currentUser = null;
+  localStorage.removeItem('et_user');
+  updateUserUI();
+  toast('Signed out');
+  show('signup');
+}
+
+// Render Coaches on Home & Find Screens
+function renderCoaches(isSearch = false){
+  const container = document.getElementById(isSearch ? 'searchCoachesList' : 'coachesList');
+  container.innerHTML = trainers.map(t => `
+    <div class="card trainer">
+      <div class="avatar">${t.name.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="grow">
+        <div class="name">${t.name} ✓</div>
+        <div class="muted">${t.meta} · ${t.rating}</div>
+        <span class="tag">${t.specs.split(',')[0]}</span>
+        <button class="btn" onclick="openTrainerProfile('${t.name}', '${t.meta}', '${t.rating}', '${t.certs}')">VIEW PROFILE &amp; BOOK</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCoaches(query){
+  const q = query.toLowerCase();
+  const filtered = trainers.filter(t => t.name.toLowerCase().includes(q) || t.specs.toLowerCase().includes(q) || t.certs.toLowerCase().includes(q));
+  const container = document.getElementById('searchCoachesList');
+  container.innerHTML = filtered.map(t => `
+    <div class="card trainer">
+      <div class="avatar">${t.name.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="grow">
+        <div class="name">${t.name} ✓</div>
+        <div class="muted">${t.meta} · ${t.rating}</div>
+        <button class="btn" onclick="openTrainerProfile('${t.name}', '${t.meta}', '${t.rating}', '${t.certs}')">VIEW PROFILE</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Open Trainer Profile
+function openTrainerProfile(name, meta, rating, certs){
+  activeBooking.coach = name;
+  document.getElementById('profName').textContent = name + ' ✓';
+  document.getElementById('profMeta').textContent = meta + ' · ' + rating;
+  document.getElementById('profAvatar').textContent = name.split(' ').map(n=>n[0]).join('');
+  document.getElementById('profCerts').textContent = certs || 'Verified Certified Coach';
+  document.getElementById('sumCoach').textContent = name;
+  calculateSplits();
+  show('profile');
+}
+
+function selectPkg(el, name, deposit){
+  document.querySelectorAll('.pkg-opt').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
-  booking.pkg = name;
-  document.getElementById('sumPackage').textContent = name;
-  document.getElementById('payPackage').textContent = name;
+  activeBooking.pkg = name;
+  activeBooking.deposit = deposit;
+  document.getElementById('sumPkg').textContent = name;
+  calculateSplits();
 }
 
 function pickDate(el){
   document.querySelectorAll('.date').forEach(d => d.classList.remove('selected'));
   el.classList.add('selected');
-  booking.date = el.innerText.replace('\n', ' ');
-  updateBookingText();
+  activeBooking.date = el.innerText.replace('\n', ' ');
+  updateScheduleText();
 }
 
 function pickTime(el){
   document.querySelectorAll('.times .time').forEach(t => t.classList.remove('selected'));
   el.classList.add('selected');
-  booking.time = el.innerText;
-  updateBookingText();
+  activeBooking.time = el.innerText;
+  updateScheduleText();
 }
 
-function updateBookingText(){
-  const str = booking.date + ' · ' + booking.time;
-  document.getElementById('sumDateTime').textContent = str;
-  document.getElementById('payDateTime').textContent = str;
+function updateScheduleText(){
+  const str = activeBooking.date + ' · ' + activeBooking.time;
+  document.getElementById('sumSchedule').textContent = str;
 }
 
-function selectPay(el){
-  document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
+// 10% Platform Cut Calculation
+function calculateSplits(){
+  const total = activeBooking.deposit;
+  const platformFee = Math.round(total * 0.10); // 10%
+  const trainerCut = total - platformFee;        // 90%
+
+  document.getElementById('sumTrainerCut').textContent = '₹' + trainerCut.toLocaleString('en-IN');
+  document.getElementById('sumPlatformCut').textContent = '₹' + platformFee.toLocaleString('en-IN');
+  document.getElementById('sumDeposit').textContent = '₹' + total.toLocaleString('en-IN');
+
+  document.getElementById('payTrainerCut').textContent = '₹' + trainerCut.toLocaleString('en-IN');
+  document.getElementById('payPlatformCut').textContent = '₹' + platformFee.toLocaleString('en-IN');
+  document.getElementById('payTotal').textContent = '₹' + total.toLocaleString('en-IN');
+
+  // Real UPI intent string
+  document.getElementById('upiDeepLink').href = `upi://pay?pa=elitetrainer@upi&pn=EliteTrainer&am=${total}&cu=INR&tn=${encodeURIComponent(activeBooking.pkg)}`;
+}
+
+// Process Payment
+function processPayment(method){
+  const total = activeBooking.deposit;
+  const platformFee = Math.round(total * 0.10);
+  const trainerCut = total - platformFee;
+
+  const newBooking = {
+    id: Date.now(),
+    trainer: activeBooking.coach,
+    pkg: activeBooking.pkg,
+    schedule: activeBooking.date + ' · ' + activeBooking.time,
+    total: total,
+    trainerShare: trainerCut,
+    platformFee: platformFee,
+    status: 'Confirmed ✓',
+    method: method
+  };
+
+  bookings.unshift(newBooking);
+  localStorage.setItem('et_bookings', JSON.stringify(bookings));
+  toast('Booking confirmed via ' + method);
+  show('my_bookings');
+}
+
+// Render Bookings Screen
+function renderBookings(){
+  const container = document.getElementById('bookingsContainer');
+  if(!bookings.length){
+    container.innerHTML = `<div class="card" style="text-align:center;padding:30px"><p style="color:#888">No bookings found.</p></div>`;
+    return;
+  }
+
+  container.innerHTML = bookings.map(b => `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <b style="font-size:15px">${b.trainer}</b>
+        <span style="color:#22c55e;font-size:11px;font-weight:700">${b.status}</span>
+      </div>
+      <div class="row"><span>Session Plan</span><b>${b.pkg}</b></div>
+      <div class="row"><span>Slot Time</span><b>${b.schedule}</b></div>
+      <div class="row"><span>Trainer Cut (90%)</span><b>₹${b.trainerShare.toLocaleString('en-IN')}</b></div>
+      <div class="row"><span>Platform Fee (10%)</span><b style="color:#22c55e">₹${b.platformFee.toLocaleString('en-IN')}</b></div>
+      <div class="row" style="font-size:13px"><span>Total Paid</span><b>₹${b.total.toLocaleString('en-IN')} (${b.method})</b></div>
+    </div>
+  `).join('');
+}
+
+// Admin Screen: Platform Commission & Credentials Verification
+function renderAdmin(){
+  let gross = 0;
+  let commission = 0;
+  let payouts = 0;
+
+  bookings.forEach(b => {
+    gross += b.total;
+    commission += b.platformFee;
+    payouts += b.trainerShare;
+  });
+
+  document.getElementById('adminTotalCommission').textContent = '₹' + commission.toLocaleString('en-IN');
+  document.getElementById('adminGrossVolume').textContent = '₹' + gross.toLocaleString('en-IN');
+  document.getElementById('adminTrainerPayouts').textContent = '₹' + payouts.toLocaleString('en-IN');
+
+  const appList = document.getElementById('adminApplicationsList');
+  if(!pendingApplications.length){
+    appList.innerHTML = `<div class="note">No pending trainer credential applications.</div>`;
+    return;
+  }
+
+  appList.innerHTML = pendingApplications.map((a, index) => `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b>${a.name}</b>
+        <span class="tag" style="background:#b45309;color:#fff">PENDING REVIEW</span>
+      </div>
+      <div class="row"><span>Experience</span><b>${a.exp}</b></div>
+      <div class="row"><span>Certifications</span><b>${a.certs}</b></div>
+      <div class="row"><span>Document Proof</span><b style="color:#22c55e">${a.file}</b></div>
+      <div class="row"><span>Elite / Celebrity Claim</span><b>${a.elite}</b></div>
+      <button class="btn" onclick="approveTrainer(${index})">APPROVE &amp; GRANT BADGE</button>
+      <button class="btn dark" onclick="rejectTrainer(${index})">REQUEST MORE DOCUMENTS</button>
+    </div>
+  `).join('');
+}
+
+function approveTrainer(index){
+  const app = pendingApplications[index];
+  trainers.push({
+    id: Date.now(),
+    name: app.name,
+    meta: 'Mumbai · ' + app.exp,
+    rating: '5.0 ★ (New)',
+    specs: app.specs,
+    certs: app.certs,
+    elite: app.elite,
+    verified: true
+  });
+  pendingApplications.splice(index, 1);
+  localStorage.setItem('et_trainers', JSON.stringify(trainers));
+  localStorage.setItem('et_pending_trainers', JSON.stringify(pendingApplications));
+  toast(app.name + ' verified and added to coach roster ✓');
+  renderAdmin();
+}
+
+function rejectTrainer(index){
+  toast('Application marked for further verification');
+}
+
+// Client Board
+function renderBoard(){
+  if(currentUser){
+    document.getElementById('boardSubtitle').textContent = currentUser.name + ' · Active Portal';
+    if(currentUser.goal) document.getElementById('boardGoalText').textContent = currentUser.goal;
+  }
+  const latest = bookings[0];
+  const nextEl = document.getElementById('boardNextSession');
+  if(latest){
+    nextEl.innerHTML = `<b>${latest.trainer}</b><br>${latest.schedule}<br><span style="color:#22c55e;font-weight:700">${latest.status}</span>`;
+  }
+}
+
+// Trainer Portal Roster
+function renderTrainerClients(){
+  document.getElementById('statClientCount').textContent = clients.length;
+  const container = document.getElementById('trainerClientsList');
+  container.innerHTML = clients.map(c => `
+    <div class="client">
+      <div class="avatar">${c.name.split(' ').map(n=>n[0]).join('')}</div>
+      <div class="info">
+        <b>${c.name}</b>
+        <span>${c.goal} · Slot: ${c.time}</span>
+        <div class="progress"><div class="fill" style="width:${c.progress}%"></div></div>
+      </div>
+      <button class="open" onclick="show('board')">BOARD</button>
+    </div>
+  `).join('');
+}
+
+function openAddClientModal(){ document.getElementById('addClientModal').classList.add('active'); }
+function closeAddClientModal(){ document.getElementById('addClientModal').classList.remove('active'); }
+
+function saveNewClient(){
+  const name = document.getElementById('newClientName').value.trim();
+  const goal = document.getElementById('newClientGoal').value.trim() || 'Transformation';
+  const time = document.getElementById('newClientTime').value.trim() || '7:00 AM';
+
+  if(!name){ toast('Enter client name'); return; }
+
+  clients.unshift({ id: Date.now(), name, goal, time, progress: 25 });
+  localStorage.setItem('et_clients', JSON.stringify(clients));
+  closeAddClientModal();
+  renderTrainerClients();
+  toast('Added ' + name + ' to roster');
+  document.getElementById('newClientName').value = '';
 }
 
 function toast(msg){
@@ -284,7 +757,8 @@ function toast(msg){
   setTimeout(() => t.style.display = 'none', 2000);
 }
 
-setRole('client');
+// Startup
+updateUserUI();
 show('home');
 </script>
 </body>
