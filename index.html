@@ -42,11 +42,11 @@ header{padding:12px 16px;display:flex;justify-content:space-between;align-items:
 .user-chip{background:var(--surface-soft);border:1px solid var(--border);padding:5px 10px;border-radius:20px;font-size:11px;font-weight:600;display:flex;align-items:center;gap:5px;cursor:pointer}
 .user-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--accent-green)}
 
-/* DEDICATED FLOATING FITNESS AI LAUNCHER (NO EXTERNAL REDIRECTS) */
+/* DEDICATED IN-APP FITNESS AI LAUNCHER */
 .ai-floating-btn{position:fixed;bottom:84px;right:16px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-radius:50px;padding:10px 16px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;border:1px solid #a5b4fc;box-shadow:0 6px 20px rgba(99,102,241,0.5);z-index:92;cursor:pointer;animation:floatAi 3s ease-in-out infinite}
 @keyframes floatAi{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 
-/* Bottom Navigation (5 Clean Client Tabs) */
+/* Bottom Navigation */
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(440px,100%);background:rgba(18,18,24,0.96);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);padding:8px 4px 12px;z-index:95}
 nav button{background:none;border:0;color:var(--text-dim);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:color 0.15s}
 nav button svg{width:20px;height:20px;stroke-width:2;stroke:currentColor;fill:none}
@@ -79,6 +79,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
 .btn-primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff}
 .btn-dark{background:var(--surface-soft);color:#fff;border:1px solid var(--border)}
 .btn-danger{background:#450a0a;color:#fca5a5;border:1px solid #7f1d1d}
+.btn-success{background:#064e3b;color:#a7f3d0;border:1px solid #059669}
 .btn-upi{background:linear-gradient(135deg,#5f259f,#491b7d);color:#fff}
 .btn-sm{padding:6px 12px;font-size:11px;border-radius:var(--radius-sm);width:auto;margin:0}
 
@@ -86,6 +87,11 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
 .field{width:100%;background:#111116;border:1px solid var(--border);border-radius:var(--radius-md);padding:12px 14px;color:#fff;margin-bottom:10px;font-size:13px;-webkit-user-select:auto;user-select:auto}
 .field:focus{border-color:var(--border-focus)}
 .label{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:5px;display:block}
+
+/* Package Options */
+.option{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;margin-bottom:8px;cursor:pointer;transition:all 0.15s}
+.option.selected{border-color:var(--primary);background:#1a192e}
+.option:hover{border-color:#475569}
 
 /* Chips & 1 to 30 Horizontal Date Scroller */
 .chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
@@ -126,6 +132,11 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
 .breakdown-row.total b{font-size:16px;color:var(--accent-green)}
 .transparency-box{background:#111b15;border:1px solid #164e32;border-radius:var(--radius-md);padding:10px 12px;margin:12px 0;font-size:11px;color:#86efac;line-height:1.4;display:flex;gap:8px;align-items:flex-start}
 
+/* Live Session Status Pulse */
+.live-pulse{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;color:#4ade80;background:#064e3b;border:1px solid #059669;padding:3px 8px;border-radius:12px}
+.live-pulse::before{content:"";width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulseLive 1.5s infinite}
+@keyframes pulseLive{0%{box-shadow:0 0 0 0 rgba(74,222,128,0.7)}70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+
 /* AI Fitness Coach Interface */
 .ai-chat-box{height:360px;overflow-y:auto;background:#0d0d12;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin}
 .ai-msg{max-width:90%;padding:11px 14px;border-radius:14px;font-size:12px;line-height:1.5}
@@ -158,7 +169,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
 /* Modals */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}
 .modal-overlay.active{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;width:100%;max-width:390px;position:relative}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:22px;width:100%;max-width:400px;position:relative;max-height:90vh;overflow-y:auto}
 
 /* Animation Sequence */
 .loading-box{text-align:center;padding:20px 0}
@@ -181,7 +192,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     <span class="brand-pill">ESCROW 10%</span>
   </div>
   <div class="header-actions">
-    <!-- Protected Developer Lock -->
+    <!-- Protected Developer Lock (Password: Developer108) -->
     <div class="dev-lock-btn" id="devLockBtn" onclick="openDevAuthModal()">
       <span>🔒</span><span id="devLockText">Developer</span>
     </div>
@@ -192,7 +203,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
   </div>
 </header>
 
-<!-- DEDICATED IN-APP FITNESS AI LAUNCHER (DOES NOT REDIRECT TO WHATSAPP) -->
+<!-- DEDICATED IN-APP FITNESS AI LAUNCHER -->
 <div class="ai-floating-btn" onclick="openFitnessAI()">
   <span style="font-size:16px">🤖</span>
   <span>Ask Fitness AI</span>
@@ -203,19 +214,19 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
   <div class="pad">
     <div style="margin:4px 0 14px">
       <h1 class="screen-title">Verified Personal Trainers</h1>
-      <p class="subtitle">Direct booking · 100% money-back escrow · Verified credentials</p>
+      <p class="subtitle">Book by 1hr, 2hr, or 24hr passes · 100% money-back escrow</p>
     </div>
 
     <!-- DEDICATED FITNESS AI HERO BUTTON BANNER -->
     <div class="ai-hero-banner" onclick="openFitnessAI()">
       <div>
         <div class="ai-hero-title"><span>🤖</span> Elite Fitness &amp; Diet AI</div>
-        <div class="ai-hero-sub">Ask about workouts, protein calculations, or trainer matching</div>
+        <div class="ai-hero-sub">Ask about 1hr/2hr/24hr plans, protein calculators, or workouts</div>
       </div>
       <button class="btn btn-sm btn-primary" style="border-radius:20px;padding:6px 14px">Chat Now →</button>
     </div>
 
-    <!-- Helpline Banner (Clearly separated so clients don't mix with AI) -->
+    <!-- Helpline Banner -->
     <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#102216;border-color:#166534">
       <div>
         <b style="font-size:12px;color:#86efac">Direct Human Booking Support</b>
@@ -238,7 +249,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
   </div>
 </section>
 
-<!-- SCREEN 2: TRAINER PROFILE & SCHEDULING (1-30 SCROLLER & GREYED-OUT SLOTS) -->
+<!-- SCREEN 2: TRAINER PROFILE & SCHEDULING (1hr, 2hr, 24hr + 1-30 SCROLLER) -->
 <section id="screen_trainer_detail" class="screen">
   <div class="pad">
     <div class="top-bar">
@@ -262,23 +273,46 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
       <p style="font-size:12px;color:var(--text-muted);line-height:1.5" id="detailCerts"></p>
     </div>
 
-    <!-- Packages -->
-    <div class="section-title"><span>1. Select Package</span></div>
+    <!-- 1hr, 2hr, 24hr & Transformation Packages -->
+    <div class="section-title"><span>1. Select Session Duration</span></div>
     <div class="card" style="padding:10px">
-      <div class="option" id="pkg_single" onclick="setPackage('single', selectedTrainer.rate, 'Single 1-on-1 Session')" style="margin-bottom:8px">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px">
-          <span>Single Session Booking</span>
-          <span id="pkgSinglePrice">₹2,500</span>
+      
+      <!-- 1 HOUR -->
+      <div class="option selected" id="pkg_1hr" onclick="selectDuration('1hr')" style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px">
+          <span>⏱️ 1 Hour Personal Training</span>
+          <span id="price_1hr">₹2,500</span>
         </div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">1-on-1 private workout session</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Standard 1-on-1 private workout &amp; form coaching</div>
       </div>
-      <div class="option" id="pkg_pack" onclick="setPackage('pack', selectedTrainer.rate * 10, '12-Session Transformation Pack')" style="margin-bottom:0">
-        <div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px">
-          <span>12-Session Transformation</span>
-          <span id="pkgPackPrice">₹25,000</span>
+
+      <!-- 2 HOURS -->
+      <div class="option" id="pkg_2hr" onclick="selectDuration('2hr')" style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px">
+          <span>⚡ 2 Hours Deep Dive &amp; Recovery</span>
+          <span id="price_2hr">₹4,500</span>
         </div>
-        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Includes full customized diet & workout plan</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Heavy compound training + assisted mobility &amp; nutrition audit</div>
       </div>
+
+      <!-- 24 HOURS (FULL DAY / VIP PASS) -->
+      <div class="option" id="pkg_24hr" onclick="selectDuration('24hr')" style="margin-bottom:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px">
+          <span>👑 24 Hours VIP On-Demand Pass</span>
+          <span id="price_24hr">₹15,000</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px">Full day private trainer access, on-demand meals, and event prep</div>
+      </div>
+
+      <!-- 12 SESSIONS TRANSFORMATION -->
+      <div class="option" id="pkg_pack" onclick="selectDuration('pack')" style="margin-bottom:0">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:13px">
+          <span>🏆 12-Session Transformation Pack</span>
+          <span id="price_pack">₹25,000</span>
+        </div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:3px">12 sessions + full macro diet &amp; workout progression plan</div>
+      </div>
+
     </div>
 
     <!-- 1 TO 30 DYNAMIC DATE SCROLLER -->
@@ -334,49 +368,67 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     </div>
 
     <div class="card">
-      <div style="font-size:14px;font-weight:800;margin-bottom:8px" id="checkoutSummaryTitle">Single Session Booking</div>
+      <div style="font-size:14px;font-weight:800;margin-bottom:8px" id="checkoutSummaryTitle">1 Hour Personal Training</div>
       <div class="breakdown-row"><span>Trainer:</span><b id="chkTrainer">Aarav Rao</b></div>
+      <div class="breakdown-row"><span>Duration:</span><b id="chkDuration">1 Hour</b></div>
       <div class="breakdown-row"><span>Slot:</span><b id="chkSlot">Day 12 · 7:00 AM</b></div>
       <div class="breakdown-row"><span>Trainer Cut (90%):</span><b id="chkTrainerFee">₹2,250</b></div>
       <div class="breakdown-row"><span>Platform Fee (10%):</span><b id="chkPlatformFee">₹250</b></div>
       <div class="breakdown-row total"><span>Total Due:</span><b id="chkTotal">₹2,500</b></div>
     </div>
 
-    <div class="section-title"><span>Choose Payment App</span></div>
+    <div class="section-title"><span>Payment Method</span></div>
 
-    <!-- Direct UPI App Launcher -->
-    <a id="realUpiLink" href="#" class="btn btn-upi" style="margin-bottom:8px" onclick="triggerUpiPay()">
-      ⚡ Pay Full Deposit via UPI (GPay / PhonePe / Paytm)
-    </a>
-
-    <!-- Instant ₹1 Verification Test -->
-    <a id="testUpiLink" href="upi://pay?pa=Sachinkartik6936@okhdfcbank&pn=EliteTrainer&am=1&cu=INR&tn=EliteTrainer%20Test%20Payment" class="btn" style="background:#059669;color:#fff;margin-bottom:12px;font-size:12px" onclick="toast('Opening UPI app to transfer ₹1 test...')">
-      🧪 Test Pay ₹1 to Your Account (Live Bank Verification)
-    </a>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
-      <button class="btn btn-dark" onclick="startSimulatedPayment('Google Pay')">
-        Google Pay (Test)
-      </button>
-      <button class="btn btn-dark" onclick="startSimulatedPayment('PhonePe')">
-        PhonePe (Test)
-      </button>
+    <!-- Official Receiving UPI Account Box -->
+    <div class="card" style="padding:12px;font-size:12px;margin-bottom:10px;background:#13131c;border-color:#3730a3">
+      <div style="font-size:11px;color:var(--text-muted);margin-bottom:4px">Official Receiving Bank Account (Escrow):</div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <b style="font-size:13px;color:#a5b4fc">Sachinkartik6936@okhdfcbank</b>
+        <button class="btn btn-sm btn-dark" style="margin:0;padding:4px 9px;font-size:10px" onclick="navigator.clipboard.writeText('Sachinkartik6936@okhdfcbank');toast('UPI ID copied!')">Copy UPI ID</button>
+      </div>
     </div>
 
-    <button class="btn" style="background:var(--accent-green);color:#fff" onclick="startSimulatedPayment('Instant Escrow UPI')">
-      ✓ Verify & Confirm Booking
+    <!-- Direct UPI App Launcher pointing to Sachin's HDFC VPA -->
+    <a id="realUpiLink" href="#" class="btn btn-upi" style="margin-bottom:10px" onclick="triggerUpiPay()">
+      ⚡ Pay via UPI App (GPay / PhonePe / Paytm)
+    </a>
+
+    <!-- Client Completed Payment Confirmation Button -->
+    <button class="btn" style="background:var(--accent-green);color:#fff;margin-bottom:10px" onclick="openClientConfirmModal()">
+      ✓ I Have Completed UPI Payment (Confirm Booking)
     </button>
+
+    <!-- DEVELOPER-ONLY FAKE/TEST PAYMENT BOX (Strictly Hidden for regular clients) -->
+    <div id="devTestPaymentBox" style="display:none;background:#1e1438;border:1px dashed #818cf8;border-radius:var(--radius-lg);padding:14px;margin-top:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <b style="font-size:12px;color:#c7d2fe">🛠️ Developer Test Mode (Authenticated)</b>
+        <span class="badge" style="background:#4338ca;color:#fff">Developer Only</span>
+      </div>
+      <p style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:10px">
+        Only you can see this box. Use this to simulate a test/fake payment, lock the slot, and dispatch the booking alert to WhatsApp.
+      </p>
+
+      <button class="btn btn-primary" onclick="developerSimulatedPayment()">
+        ▶ Run Fake Test Payment &amp; Send WhatsApp Alert
+      </button>
+
+      <!-- Instant ₹1 Verification Test for Dev -->
+      <a id="testUpiLink" href="upi://pay?pa=Sachinkartik6936@okhdfcbank&pn=EliteTrainer&am=1&cu=INR&tn=EliteTrainer%20Test%20Payment" class="btn btn-dark" style="margin-top:8px;font-size:11px" onclick="toast('Opening UPI app to transfer ₹1 test...')">
+        🧪 Test Real ₹1 Transfer to Your Bank
+      </a>
+    </div>
+
     <div style="text-align:center;font-size:10px;color:var(--text-dim);margin-top:12px">🔒 256-bit Encrypted Escrow Gate · Helpline: 9967456583</div>
   </div>
 </section>
 
-<!-- SCREEN 4: CLIENT DASHBOARD (SESSIONS & DIET) -->
+<!-- SCREEN 4: CLIENT DASHBOARD (SESSIONS & LIVE STATUS & DIET) -->
 <section id="screen_dashboard" class="screen">
   <div class="pad">
     <div class="top-bar">
       <div>
         <h1 class="screen-title" id="dashClientName">My Training Portal</h1>
-        <p class="subtitle" style="margin-bottom:0">All access: sessions, diet & progress</p>
+        <p class="subtitle" style="margin-bottom:0">All access: sessions, live status, diet &amp; progress</p>
       </div>
       <button class="btn btn-dark btn-sm" onclick="show('screen_client_login')">Switch</button>
     </div>
@@ -385,17 +437,24 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     <div class="session-stat-card">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div>
-          <span style="font-size:11px;color:#a5b4fc;font-weight:600">ACTIVE PACKAGE</span>
-          <div style="font-size:18px;font-weight:800;margin-top:2px" id="activePkgName">12-Session Muscle Pack</div>
+          <span style="font-size:11px;color:#a5b4fc;font-weight:600">LATEST BOOKED SESSION</span>
+          <div style="font-size:17px;font-weight:800;margin-top:2px" id="activePkgName">1 Hour Personal Training</div>
         </div>
-        <span class="badge" style="background:#312e81;color:#c7d2fe">In Progress</span>
+        <span id="activeSessionBadge" class="live-pulse">🟢 Session Running Now</span>
       </div>
+      
+      <!-- Live Running Timer Display -->
+      <div id="liveTimerBox" style="background:rgba(0,0,0,0.3);border-radius:10px;padding:8px 12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:12px">
+        <span style="color:#cbd5e1">Live Session Elapsed:</span>
+        <b style="color:#4ade80;font-size:14px" id="liveTimerText">00:32:15</b>
+      </div>
+
       <div class="session-bar">
-        <div class="session-bar-fill" id="sessionProgressFill" style="width:41%"></div>
+        <div class="session-bar-fill" id="sessionProgressFill" style="width:65%"></div>
       </div>
       <div style="display:flex;justify-content:space-between;font-size:12px;color:#cbd5e1">
-        <span id="sessionsCompletedText">5 Sessions Completed</span>
-        <span id="sessionsRemainingText">7 Sessions Left</span>
+        <span id="sessionsCompletedText">Duration: 1 Hour</span>
+        <span id="sessionsRemainingText">Coach: Aarav Rao</span>
       </div>
     </div>
 
@@ -462,19 +521,19 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
           <br><br>
           I am strictly trained on <b>bodybuilding, workout routines, calorie/macro calculation, fat loss, muscle growth, and coaching</b>.
           <br><br>
-          Ask me anything about your training, exercises, or nutrition below!
+          Ask me anything about your 1hr, 2hr, or 24hr training programs, exercises, or nutrition below!
         </div>
         <div class="ai-typing-indicator" id="aiTyping">Elite AI is analyzing your fitness query...</div>
       </div>
 
       <!-- Quick Interactive Prompt Chips -->
       <div class="ai-chips">
+        <div class="ai-chip" onclick="sendAiQuick('Difference between 1hr and 2hr training sessions?')">⏱️ 1hr vs 2hr Session?</div>
+        <div class="ai-chip" onclick="sendAiQuick('How does the 24hr VIP pass work?')">👑 24hr VIP Pass?</div>
         <div class="ai-chip" onclick="sendAiQuick('Give me a 4-day workout split')">🏋️ 4-Day Workout Split</div>
         <div class="ai-chip" onclick="sendAiQuick('How much protein do I need for muscle growth?')">🥩 Protein Calculation</div>
         <div class="ai-chip" onclick="sendAiQuick('How to lose belly fat while keeping muscle?')">🔥 Fat Loss Protocol</div>
-        <div class="ai-chip" onclick="sendAiQuick('What should I eat before and after workout?')">🍌 Pre/Post Workout Meals</div>
         <div class="ai-chip" onclick="sendAiQuick('Should I take creatine daily?')">⚡ Creatine Guide</div>
-        <div class="ai-chip" onclick="sendAiQuick('Which trainer is best for celebrity transformation?')">⭐ Recommend a Coach</div>
       </div>
 
       <!-- In-App Interactive Input Bar -->
@@ -486,7 +545,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
   </div>
 </section>
 
-<!-- SCREEN 6: DEVELOPER CONSOLE (LOCKED TO SACHINKARTIK6936@GMAIL.COM) -->
+<!-- SCREEN 6: DEVELOPER CONSOLE (LOCKED TO SACHINKARTIK6936@GMAIL.COM / DEVELOPER108) -->
 <section id="screen_developer" class="screen">
   <div class="pad">
     <div class="top-bar">
@@ -511,6 +570,35 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
       </div>
     </div>
 
+    
+
+    <!-- DEVELOPER-ONLY APP DIAGNOSTIC & FAKE BOOKING TEST TOOL -->
+    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#2e1065);border-color:#6366f1;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <b style="font-size:13px;color:#c7d2fe">🧪 Developer Diagnostic &amp; Fake Booking Test</b>
+        <span class="badge" style="background:#4338ca;color:#fff">Owner Only</span>
+      </div>
+      <p style="font-size:11px;color:#cbd5e1;line-height:1.4;margin-bottom:12px">
+        Test if the app and WhatsApp alert flow are working without paying. Tapping below will simulate a <b>2 Hours (₹4,500)</b> booking for Rahul Kapoor, log it in Live Monitor, credit <b>₹450 (10%)</b> to your revenue, and open WhatsApp with the exact booking alert pre-filled to <b>9967456583</b>.
+      </p>
+      
+      <button class="btn btn-primary" onclick="runDeveloperDiagnosticBooking()">
+        ⚡ Trigger Test Fake Booking &amp; WhatsApp Alert
+      </button>
+    </div><!-- LIVE SESSION & CLIENT BOOKING MONITOR -->
+    <div class="section-title">
+      <span>Live Sessions &amp; Client Bookings Monitor</span>
+      <span style="font-size:11px;color:#a5b4fc" id="devBookingsCount">0 Bookings</span>
+    </div>
+    <div id="devBookingsList"></div>
+
+    <!-- REGISTERED CLIENTS ROSTER -->
+    <div class="section-title">
+      <span>Registered Clients Log</span>
+      <span style="font-size:11px;color:#a5b4fc" id="devClientsCount">0 Clients</span>
+    </div>
+    <div id="devClientsList"></div>
+
     <!-- Trainer Management (Add & Remove PTs) -->
     <div class="section-title">
       <span>Personal Trainers Roster</span>
@@ -521,7 +609,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     <div class="section-title"><span>System Configuration</span></div>
     <div class="card">
       <div class="breakdown-row"><span>Developer Account:</span><b>sachinkartik6936@gmail.com</b></div>
-      <div class="breakdown-row"><span>Helpline Mobile:</span><b>+91 9967456583</b></div>
+      <div class="breakdown-row"><span>Developer Helpline:</span><b>+91 9967456583</b></div>
       <div class="breakdown-row"><span>Payout UPI VPA:</span><b>Sachinkartik6936@okhdfcbank</b></div>
       <div class="breakdown-row"><span>Platform Escrow Cut:</span><b style="color:var(--accent-green)">10% Fixed</b></div>
     </div>
@@ -537,14 +625,17 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     </div>
 
     <div class="card" style="padding:20px">
-      <h2 style="font-size:20px;font-weight:800;margin-bottom:4px">Client Sign In</h2>
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Access your sessions, customized diet and trainer notes</p>
+      <h2 style="font-size:20px;font-weight:800;margin-bottom:4px">Client Sign In / Register</h2>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Access your sessions, 1hr/2hr/24hr passes, and customized diet</p>
 
       <label class="label">Your Name</label>
       <input type="text" class="field" id="loginClientName" placeholder="e.g. Rahul Kapoor" value="Rahul Kapoor">
 
       <label class="label">Email Address</label>
       <input type="email" class="field" id="loginClientEmail" placeholder="e.g. rahul@gmail.com" value="rahul@example.com">
+
+      <label class="label">Mobile Number</label>
+      <input type="tel" class="field" id="loginClientPhone" placeholder="e.g. +91 98765 43210" value="+91 98200 55432">
 
       <label class="label">Fitness Target</label>
       <select class="field" id="loginClientGoal">
@@ -568,7 +659,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
       <h3 style="font-size:17px;font-weight:800;color:#a5b4fc">🔒 Developer Access Only</h3>
       <span style="font-size:18px;cursor:pointer;color:#888" onclick="closeDevAuthModal()">✕</span>
     </div>
-    <p style="font-size:11px;color:var(--text-muted);margin-bottom:14px">Restricted portal for adding and removing trainers, pricing and platform configuration.</p>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:14px">Restricted portal for adding and removing trainers, viewing registered clients, live sessions, and 10% platform revenue.</p>
 
     <label class="label">Developer Email</label>
     <input type="email" class="field" id="devEmailInput" placeholder="Enter developer email" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -600,7 +691,7 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     <label class="label">Specialties (comma separated)</label>
     <input type="text" class="field" id="newPtSpecs" placeholder="e.g. Strength, Fat Loss, Celebrity">
 
-    <label class="label">Per Session Rate (₹)</label>
+    <label class="label">1-Hour Session Base Rate (₹)</label>
     <input type="number" class="field" id="newPtRate" placeholder="2500" value="2500">
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px">
@@ -616,19 +707,52 @@ h1.screen-title{font-size:23px;font-weight:800;letter-spacing:-0.5px;margin-bott
     <div id="animLoadingPhase" class="loading-box">
       <div class="spinner"></div>
       <b style="font-size:15px;display:block;margin-bottom:6px" id="animStatusText">Securing Escrow Payment...</b>
-      <p style="font-size:12px;color:var(--text-muted)">Verifying slot reservation with trainer</p>
+      <p style="font-size:12px;color:var(--text-muted)">Verifying slot reservation &amp; generating WhatsApp receipt</p>
     </div>
 
     <div id="animSuccessPhase" style="display:none;padding:10px 0">
       <div class="check-anim">✓</div>
       <h3 style="font-size:19px;font-weight:800;margin-bottom:4px">Booking Confirmed!</h3>
-      <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px" id="animSuccessSub">Session slot reserved in Escrow.</p>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px" id="animSuccessSub">Session slot reserved in Escrow.</p>
+      
+      <!-- Instant WhatsApp Dispatch Button for Developer Receipt -->
+      <a id="btnDispatchWa" href="#" target="_blank" class="btn" style="background:#25d366;color:#fff;margin-bottom:8px;font-size:12px">
+        📲 Send Booking Receipt to Developer WhatsApp (9967456583)
+      </a>
+
       <button class="btn btn-primary" onclick="finishBookingAnimation()">GO TO MY CLIENT BOARD</button>
     </div>
   </div>
 </div>
 
-<!-- BOTTOM NAVIGATION (5 TABS: COACHES, SCHEDULE, SESSIONS, DIET, AI COACH) -->
+<!-- MODAL: CLIENT UPI PAYMENT CONFIRMATION -->
+<div class="modal-overlay" id="clientConfirmModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h3 style="font-size:16px;font-weight:800;color:#fff">Confirm Your UPI Payment</h3>
+      <span style="font-size:18px;cursor:pointer;color:#888" onclick="closeClientConfirmModal()">✕</span>
+    </div>
+    <p style="font-size:11px;color:var(--text-muted);margin-bottom:12px">
+      Please confirm your contact details and optional UPI transaction UTR after paying to <b>Sachinkartik6936@okhdfcbank</b> so the developer desk can activate your session.
+    </p>
+
+    <label class="label">Your Name</label>
+    <input type="text" class="field" id="confirmClientName" placeholder="Your Full Name">
+
+    <label class="label">Contact Mobile / WhatsApp</label>
+    <input type="tel" class="field" id="confirmClientPhone" placeholder="+91 XXXXX XXXXX">
+
+    <label class="label">UPI Reference / UTR Number (Optional)</label>
+    <input type="text" class="field" id="confirmClientUtr" placeholder="e.g. 12-digit UTR from GPay / PhonePe">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+      <button class="btn btn-dark" onclick="closeClientConfirmModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitClientPayment()">Confirm Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAVIGATION -->
 <nav id="bottomNav">
   <button onclick="show('screen_home')" data-target="screen_home" class="active">
     <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -666,11 +790,19 @@ const DEV_CREDENTIALS = {
 
 let isDevAuthenticated = false;
 
+// Current Active Client
 let clientUser = JSON.parse(localStorage.getItem('et_client_user')) || {
   name: 'Rahul Kapoor',
   email: 'rahul@example.com',
+  phone: '+91 98200 55432',
   goal: 'Fat Loss & Transformation'
 };
+
+// Registered Clients Directory (Visible in Developer Console)
+let registeredClients = JSON.parse(localStorage.getItem('et_registered_clients')) || [
+  { id: 'c_1', name: 'Rahul Kapoor', email: 'rahul@example.com', phone: '+91 98200 55432', goal: 'Fat Loss & Transformation', joined: 'Oct 28, 2026' },
+  { id: 'c_2', name: 'Priya Sharma', email: 'priya@example.com', phone: '+91 98765 12340', goal: 'Athletic Conditioning', joined: 'Oct 27, 2026' }
+];
 
 let trainers = JSON.parse(localStorage.getItem('et_pt_roster')) || [
   {
@@ -710,13 +842,40 @@ let bookedSlots = JSON.parse(localStorage.getItem('et_booked_slots')) || {
   'pt_2_10_7:00 AM': true
 };
 
+// Bookings & Live Session Records
 let bookingHistory = JSON.parse(localStorage.getItem('et_booking_history')) || [
-  { id: 901, trainer: 'Aarav Rao', slot: 'Day 04 · 7:00 AM', status: 'Completed ✓', notes: 'Chest & Triceps progressive overload. Adherence 100%.', amount: 2500, trainerCut: 2250, platformFee: 250 },
-  { id: 902, trainer: 'Aarav Rao', slot: 'Day 06 · 7:00 AM', status: 'Completed ✓', notes: 'Back & Core stability. Macros on track.', amount: 2500, trainerCut: 2250, platformFee: 250 }
+  {
+    id: 901,
+    clientName: 'Rahul Kapoor',
+    clientEmail: 'rahul@example.com',
+    clientPhone: '+91 98200 55432',
+    trainer: 'Aarav Rao',
+    duration: '1 Hour',
+    slot: 'Day 08 · 7:00 AM',
+    status: 'Running Now 🟢',
+    amount: 2500,
+    trainerCut: 2250,
+    platformFee: 250,
+    notes: 'Active live workout in progress'
+  },
+  {
+    id: 902,
+    clientName: 'Priya Sharma',
+    clientEmail: 'priya@example.com',
+    clientPhone: '+91 98765 12340',
+    trainer: 'Neha Shah',
+    duration: '2 Hours',
+    slot: 'Day 06 · 8:00 AM',
+    status: 'Completed ✓',
+    amount: 3960,
+    trainerCut: 3564,
+    platformFee: 396,
+    notes: 'HIIT & mobility completed'
+  }
 ];
 
 let selectedTrainer = trainers[0];
-let selectedPackage = { type: 'single', price: 2500, name: 'Single 1-on-1 Session' };
+let selectedPackage = { type: '1hr', duration: '1 Hour', price: 2500, name: '1 Hour Personal Training' };
 let selectedDay = 8;
 let selectedTime = '8:00 AM';
 
@@ -744,6 +903,14 @@ function show(screenId){
   if(screenId === 'screen_trainer_detail') renderTrainerDetail();
   if(screenId === 'screen_dashboard') renderDashboard();
   if(screenId === 'screen_developer') renderDeveloper();
+
+  // Guard Developer Test Payment Box on Checkout
+  if(screenId === 'screen_checkout'){
+    const devBox = document.getElementById('devTestPaymentBox');
+    if(devBox){
+      devBox.style.display = isDevAuthenticated ? 'block' : 'none';
+    }
+  }
 }
 
 function openFitnessAI(){
@@ -823,7 +990,7 @@ function renderTrainersList(filterTag = 'all'){
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
           <div>
-            <span style="font-size:10px;color:var(--text-muted)">Per Session</span>
+            <span style="font-size:10px;color:var(--text-muted)">1-Hr Base Rate</span>
             <div style="font-size:15px;font-weight:800">₹${t.rate.toLocaleString('en-IN')}</div>
           </div>
           <button class="btn btn-primary btn-sm" onclick="chooseTrainer('${t.id}')">BOOK SESSION →</button>
@@ -846,7 +1013,7 @@ function chooseTrainer(id){
 }
 
 /* ==============================================================
-   2. SCHEDULER: 1-30 DATE SCROLLER & GREYED OUT SLOTS
+   2. DURATION SELECTION: 1HR, 2HR, 24HR & TRANSFORMATION PACK
    ============================================================== */
 function renderTrainerDetail(){
   document.getElementById('detailAvatar').textContent = selectedTrainer.name.split(' ').map(n=>n[0]).join('');
@@ -855,18 +1022,43 @@ function renderTrainerDetail(){
   document.getElementById('detailCerts').textContent = selectedTrainer.certs;
   document.getElementById('detailBadges').innerHTML = selectedTrainer.specs.map(s => `<span class="badge">${s}</span>`).join('');
 
-  document.getElementById('pkgSinglePrice').textContent = '₹' + selectedTrainer.rate.toLocaleString('en-IN');
-  document.getElementById('pkgPackPrice').textContent = '₹' + (selectedTrainer.rate * 10).toLocaleString('en-IN');
+  // Dynamically calculate duration prices based on trainer rate
+  const p1 = selectedTrainer.rate;
+  const p2 = Math.round(selectedTrainer.rate * 1.8);
+  const p24 = Math.round(selectedTrainer.rate * 6.0);
+  const pPack = Math.round(selectedTrainer.rate * 10.0);
 
-  setPackage('single', selectedTrainer.rate, 'Single 1-on-1 Session');
+  document.getElementById('price_1hr').textContent = '₹' + p1.toLocaleString('en-IN');
+  document.getElementById('price_2hr').textContent = '₹' + p2.toLocaleString('en-IN');
+  document.getElementById('price_24hr').textContent = '₹' + p24.toLocaleString('en-IN');
+  document.getElementById('price_pack').textContent = '₹' + pPack.toLocaleString('en-IN');
+
+  selectDuration('1hr');
   renderDateScroller();
   renderTimeSlots();
 }
 
-function setPackage(type, price, name){
-  selectedPackage = { type, price, name };
-  document.getElementById('pkg_single').className = 'option' + (type==='single' ? ' selected' : '');
+function selectDuration(type){
+  const p1 = selectedTrainer.rate;
+  const p2 = Math.round(selectedTrainer.rate * 1.8);
+  const p24 = Math.round(selectedTrainer.rate * 6.0);
+  const pPack = Math.round(selectedTrainer.rate * 10.0);
+
+  document.getElementById('pkg_1hr').className = 'option' + (type==='1hr' ? ' selected' : '');
+  document.getElementById('pkg_2hr').className = 'option' + (type==='2hr' ? ' selected' : '');
+  document.getElementById('pkg_24hr').className = 'option' + (type==='24hr' ? ' selected' : '');
   document.getElementById('pkg_pack').className = 'option' + (type==='pack' ? ' selected' : '');
+
+  if(type === '1hr'){
+    selectedPackage = { type: '1hr', duration: '1 Hour', price: p1, name: '1 Hour Personal Training' };
+  } else if(type === '2hr'){
+    selectedPackage = { type: '2hr', duration: '2 Hours', price: p2, name: '2 Hours Deep Dive & Recovery' };
+  } else if(type === '24hr'){
+    selectedPackage = { type: '24hr', duration: '24 Hours', price: p24, name: '24 Hours VIP On-Demand Pass' };
+  } else {
+    selectedPackage = { type: 'pack', duration: '12 Sessions', price: pPack, name: '12-Session Transformation Pack' };
+  }
+
   calculateBreakdown();
 }
 
@@ -932,6 +1124,7 @@ function calculateBreakdown(){
   document.getElementById('bkTotal').textContent = '₹' + total.toLocaleString('en-IN');
 
   document.getElementById('chkTrainer').textContent = selectedTrainer.name;
+  document.getElementById('chkDuration').textContent = selectedPackage.duration;
   document.getElementById('chkSlot').textContent = `Day ${selectedDay < 10 ? '0' + selectedDay : selectedDay} · ${selectedTime}`;
   document.getElementById('chkTrainerFee').textContent = '₹' + trainerCut.toLocaleString('en-IN');
   document.getElementById('chkPlatformFee').textContent = '₹' + platformFee.toLocaleString('en-IN');
@@ -939,7 +1132,7 @@ function calculateBreakdown(){
   document.getElementById('checkoutSummaryTitle').textContent = selectedPackage.name;
 
   // Real UPI link pointing directly to Sachin's HDFC bank
-  const upiLink = `upi://pay?pa=Sachinkartik6936@okhdfcbank&pn=EliteTrainer&am=${total}&cu=INR&tn=${encodeURIComponent(selectedTrainer.name + ' PT Session')}`;
+  const upiLink = `upi://pay?pa=Sachinkartik6936@okhdfcbank&pn=EliteTrainer&am=${total}&cu=INR&tn=${encodeURIComponent(selectedTrainer.name + ' ' + selectedPackage.duration + ' Session')}`;
   document.getElementById('realUpiLink').setAttribute('href', upiLink);
 }
 
@@ -949,13 +1142,91 @@ function proceedToPayment(){
 }
 
 function triggerUpiPay(){
-  toast('Launching UPI app for payment...');
-  setTimeout(() => {
-    startSimulatedPayment('UPI App (Verified)');
-  }, 2500);
+  toast('Opening your UPI app (GPay / PhonePe / Paytm)...');
 }
 
-function startSimulatedPayment(methodName){
+function openClientConfirmModal(){
+  document.getElementById('clientConfirmModal').classList.add('active');
+  document.getElementById('confirmClientName').value = clientUser.name || '';
+  document.getElementById('confirmClientPhone').value = clientUser.phone || '';
+  document.getElementById('confirmClientUtr').value = '';
+}
+
+function closeClientConfirmModal(){
+  document.getElementById('clientConfirmModal').classList.remove('active');
+}
+
+function submitClientPayment(){
+  const name = document.getElementById('confirmClientName').value.trim() || clientUser.name;
+  const phone = document.getElementById('confirmClientPhone').value.trim() || clientUser.phone;
+  const utr = document.getElementById('confirmClientUtr').value.trim();
+
+  clientUser.name = name;
+  clientUser.phone = phone;
+  localStorage.setItem('et_client_user', JSON.stringify(clientUser));
+
+  closeClientConfirmModal();
+  startPaymentWorkflow('UPI App', utr, false);
+}
+
+function developerSimulatedPayment(){
+  if(!isDevAuthenticated){
+    toast('Access restricted! Developer login required.');
+    return;
+  }
+  startPaymentWorkflow('Developer Test Simulation', 'DEV-SIM-108', true);
+}
+
+function runDeveloperDiagnosticBooking(){
+  if(!isDevAuthenticated){
+    toast('Access restricted! Developer login required.');
+    return;
+  }
+
+  const testBooking = {
+    id: Date.now(),
+    clientName: 'Rahul Kapoor',
+    clientEmail: 'rahul@example.com',
+    clientPhone: '+91 98200 55432',
+    trainer: 'Aarav Rao',
+    duration: '2 Hours Deep Dive & Recovery',
+    slot: 'Day 12 at 7:00 AM',
+    status: 'Confirmed in Escrow ✓',
+    notes: 'Developer diagnostic fake payment simulation.',
+    amount: 4500,
+    trainerCut: 4050,
+    platformFee: 450
+  };
+
+  bookingHistory.unshift(testBooking);
+  localStorage.setItem('et_booking_history', JSON.stringify(bookingHistory));
+
+  // Lock the slot
+  bookedSlots['pt_1_12_7:00 AM'] = true;
+  localStorage.setItem('et_booked_slots', JSON.stringify(bookedSlots));
+
+  // Prepare exact alert format requested by user
+  const alertText = 
+`🚨 *NEW ELITETRAINER BOOKING ALERT*
+━━━━━━━━━━━━━━━━━━━
+👤 *Client:* Rahul Kapoor (+91 98200 55432)
+✉️ *Email:* rahul@example.com
+🏋️ *Trainer Booked:* Aarav Rao
+⏱️ *Duration:* 2 Hours Deep Dive & Recovery
+📅 *Slot:* Day 12 at 7:00 AM
+💰 *Total Paid:* ₹4,500
+💵 *Your 10% Platform Cut:* ₹450
+🤝 *Trainer 90% Share:* ₹4,050
+🛡️ *Status:* Confirmed in Escrow (Paid via UPI)`;
+
+  renderDeveloper();
+  toast('Test fake booking created (+₹450 credited to revenue)! Opening WhatsApp...');
+
+  const waUrl = `https://wa.me/919967456583?text=${encodeURIComponent(alertText)}`;
+  window.open(waUrl, '_blank');
+}
+
+function startPaymentWorkflow(methodName, utr = '', isDev = false){
   const modal = document.getElementById('paymentAnimModal');
   const loading = document.getElementById('animLoadingPhase');
   const success = document.getElementById('animSuccessPhase');
@@ -964,11 +1235,11 @@ function startSimulatedPayment(methodName){
   modal.classList.add('active');
   loading.style.display = 'block';
   success.style.display = 'none';
-  status.textContent = `Connecting to ${methodName}...`;
+  status.textContent = isDev ? 'Running Developer Test Simulation...' : 'Securing Escrow Payment...';
 
   setTimeout(() => {
-    status.textContent = 'Locking 10% Escrow & Reserving Slot...';
-  }, 1200);
+    status.textContent = 'Locking Slot & Formatting Developer WhatsApp Alert...';
+  }, 1000);
 
   setTimeout(() => {
     const slotKey = `${selectedTrainer.id}_${selectedDay}_${selectedTime}`;
@@ -981,10 +1252,14 @@ function startSimulatedPayment(methodName){
 
     const newBooking = {
       id: Date.now(),
+      clientName: clientUser.name,
+      clientEmail: clientUser.email,
+      clientPhone: clientUser.phone || '+91 98200 55432',
       trainer: selectedTrainer.name,
-      slot: `Day ${selectedDay < 10 ? '0' + selectedDay : selectedDay} · ${selectedTime}`,
-      status: 'Confirmed in Escrow ✓',
-      notes: `${selectedPackage.name}. Coach notified.`,
+      duration: selectedPackage.duration,
+      slot: `Day ${selectedDay < 10 ? '0' + selectedDay : selectedDay} at ${selectedTime}`,
+      status: isDev ? 'Developer Test (Escrow ✓)' : 'Confirmed in Escrow ✓',
+      notes: `${selectedPackage.name}. ${utr ? 'UTR: ' + utr : 'Method: ' + methodName}.`,
       amount: total,
       trainerCut: trainerCut,
       platformFee: platformFee
@@ -993,10 +1268,25 @@ function startSimulatedPayment(methodName){
     bookingHistory.unshift(newBooking);
     localStorage.setItem('et_booking_history', JSON.stringify(bookingHistory));
 
+    const waText = 
+`🚨 *NEW ELITETRAINER BOOKING ALERT*
+━━━━━━━━━━━━━━━━━━━
+👤 *Client:* ${clientUser.name} (${clientUser.phone || 'No phone'})
+✉️ *Email:* ${clientUser.email}
+🏋️ *Trainer Booked:* ${selectedTrainer.name}
+⏱️ *Duration:* ${selectedPackage.duration}
+📅 *Slot:* Day ${selectedDay < 10 ? '0' + selectedDay : selectedDay} at ${selectedTime}
+💰 *Total Paid:* ₹${total.toLocaleString('en-IN')}
+💵 *Your 10% Platform Cut:* ₹${platformFee.toLocaleString('en-IN')}
+🤝 *Trainer 90% Share:* ₹${trainerCut.toLocaleString('en-IN')}
+🛡️ *Status:* ${isDev ? 'Developer Test Confirmed' : 'Confirmed in Escrow (Paid via UPI)'}${utr ? '\n🔢 *UTR/Ref:* ' + utr : ''}`;
+
+    document.getElementById('btnDispatchWa').href = `https://wa.me/919967456583?text=${encodeURIComponent(waText)}`;
+
     loading.style.display = 'none';
     success.style.display = 'block';
-    document.getElementById('animSuccessSub').textContent = `${selectedTrainer.name} · Day ${selectedDay} at ${selectedTime}`;
-  }, 2400);
+    document.getElementById('animSuccessSub').textContent = `${selectedTrainer.name} · ${selectedPackage.duration} · Day ${selectedDay} at ${selectedTime}`;
+  }, 2200);
 }
 
 function finishBookingAnimation(){
@@ -1005,14 +1295,48 @@ function finishBookingAnimation(){
 }
 
 /* ==============================================================
-   4. CLIENT DASHBOARD: SESSIONS, DIET & HISTORY
+   4. CLIENT DASHBOARD: SESSIONS, LIVE STATUS & DIET
    ============================================================== */
+let liveTimerSeconds = 1935; // simulated running timer: ~32 mins
+setInterval(() => {
+  liveTimerSeconds++;
+  const hrs = Math.floor(liveTimerSeconds / 3600);
+  const mins = Math.floor((liveTimerSeconds % 3600) / 60);
+  const secs = liveTimerSeconds % 60;
+  const pad = (n) => (n < 10 ? '0' + n : n);
+  const timerEl = document.getElementById('liveTimerText');
+  if(timerEl) timerEl.textContent = `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+}, 1000);
+
 function renderDashboard(){
   document.getElementById('dashClientName').textContent = `${clientUser.name.split(' ')[0]}'s Portal`;
   document.getElementById('dietTargetTitle').textContent = clientUser.goal || 'Custom Diet Program';
 
   const total = bookingHistory.length;
   document.getElementById('totalBookingsCount').textContent = `${total} Recorded`;
+
+  // Check latest session status
+  const latest = bookingHistory[0];
+  const timerBox = document.getElementById('liveTimerBox');
+  const badgeEl = document.getElementById('activeSessionBadge');
+
+  if(latest){
+    document.getElementById('activePkgName').textContent = `${latest.duration} with ${latest.trainer}`;
+    document.getElementById('sessionsCompletedText').textContent = `Slot: ${latest.slot}`;
+    document.getElementById('sessionsRemainingText').textContent = `Paid: ₹${latest.amount.toLocaleString('en-IN')}`;
+
+    if(latest.status.includes('Running')){
+      badgeEl.className = 'live-pulse';
+      badgeEl.textContent = '🟢 Session Running Now';
+      timerBox.style.display = 'flex';
+    } else {
+      badgeEl.className = 'badge';
+      badgeEl.style.background = '#1e1b4b';
+      badgeEl.style.color = '#c7d2fe';
+      badgeEl.textContent = latest.status;
+      timerBox.style.display = 'none';
+    }
+  }
 
   const container = document.getElementById('sessionHistoryList');
   if(!bookingHistory.length){
@@ -1022,9 +1346,9 @@ function renderDashboard(){
 
   container.innerHTML = bookingHistory.map(b => `
     <div class="history-item">
-      <div class="history-icon">✓</div>
+      <div class="history-icon">${b.status.includes('Running') ? '🟢' : '✓'}</div>
       <div class="history-info">
-        <b>${b.trainer}</b>
+        <b>${b.trainer} (${b.duration})</b>
         <span>${b.slot} · ${b.status}</span>
         <div style="font-size:11px;color:#cbd5e1;margin-top:2px">${b.notes}</div>
       </div>
@@ -1039,10 +1363,21 @@ function renderDashboard(){
 function saveClientLogin(){
   const name = document.getElementById('loginClientName').value.trim() || 'Client';
   const email = document.getElementById('loginClientEmail').value.trim() || 'client@example.com';
+  const phone = document.getElementById('loginClientPhone').value.trim() || '+91 98200 55432';
   const goal = document.getElementById('loginClientGoal').value;
 
-  clientUser = { name, email, goal };
+  clientUser = { name, email, phone, goal };
   localStorage.setItem('et_client_user', JSON.stringify(clientUser));
+
+  // Add to developer client directory if not exists
+  const existingIdx = registeredClients.findIndex(c => c.email === email);
+  if(existingIdx >= 0){
+    registeredClients[existingIdx] = { ...clientUser, joined: 'Active Today' };
+  } else {
+    registeredClients.unshift({ id: 'c_' + Date.now(), name, email, phone, goal, joined: 'Just Now' });
+  }
+  localStorage.setItem('et_registered_clients', JSON.stringify(registeredClients));
+
   updateHeader();
   toast(`Logged in as ${name}`);
   show('screen_dashboard');
@@ -1064,16 +1399,13 @@ function sendAiMessage(){
   const chat = document.getElementById('aiChatBox');
   const typing = document.getElementById('aiTyping');
 
-  // Append user message
   chat.innerHTML += `<div class="ai-msg user">${escapeHtml(query)}</div>`;
   input.value = '';
   chat.scrollTop = chat.scrollHeight;
 
-  // Show typing indicator
   typing.style.display = 'block';
   chat.scrollTop = chat.scrollHeight;
 
-  // Generate In-App Intelligent Fitness Response (Strictly fitness scope)
   setTimeout(() => {
     typing.style.display = 'none';
     const reply = generateFitnessAiResponse(query);
@@ -1090,7 +1422,6 @@ function escapeHtml(text) {
 function generateFitnessAiResponse(query){
   const q = query.toLowerCase().trim();
 
-  // Strict domain gatekeeper: only answers fitness, nutrition, supplements, training
   const fitnessKeywords = [
     'workout', 'exercise', 'diet', 'protein', 'calorie', 'calories', 'fat', 'muscle', 'gym',
     'train', 'trainer', 'coach', 'pt', 'routine', 'split', 'chest', 'back', 'leg', 'legs',
@@ -1099,67 +1430,48 @@ function generateFitnessAiResponse(query){
     'whey', 'supplement', 'supplements', 'squat', 'squats', 'bench', 'deadlift', 'deadlifts',
     'meal', 'meals', 'nutrition', 'hiit', 'rep', 'reps', 'set', 'sets', 'rest', 'recovery',
     'body', 'fitness', 'gain', 'lose', 'food', 'intake', 'escrow', 'booking', 'aarav', 'neha',
-    'sameer', 'water', 'hydration', 'sleep', 'sore', 'injury', 'warmup', 'cooldown'
+    'sameer', 'water', 'hydration', 'sleep', 'sore', 'injury', 'warmup', 'cooldown', '1hr', '2hr', '24hr', 'hour'
   ];
 
   const isFitness = fitnessKeywords.some(keyword => q.includes(keyword));
 
-  // Reject non-fitness questions strictly
   if(!isFitness && q.length > 3){
-    return "⚠️ <b>Fitness Domain Only</b>: I am your dedicated <b>Personal Fitness &amp; Nutrition AI</b>.<br><br>I only specialize in:<br>• Customized workout splits &amp; exercise form<br>• Nutrition, calories &amp; protein calculations<br>• Fat loss &amp; muscle hypertrophy protocols<br>• Personal trainer recommendations on EliteTrainer<br><br>👉 <i>Please ask me anything related to your workouts, diet, or physique goals!</i>";
+    return "⚠️ <b>Fitness Domain Only</b>: I am your dedicated <b>Personal Fitness &amp; Nutrition AI</b>.<br><br>I only specialize in:<br>• 1hr, 2hr, and 24hr training session design<br>• Customized workout splits &amp; exercise form<br>• Nutrition, calories &amp; protein calculations<br>• Fat loss &amp; muscle hypertrophy protocols<br>• Personal trainer recommendations on EliteTrainer<br><br>👉 <i>Please ask me anything related to your workouts, diet, or physique goals!</i>";
   }
 
-  // 1. Protein Calculations
+  if(q.includes('1hr') || q.includes('2hr') || q.includes('duration') || q.includes('difference')){
+    return "⏱️ <b>1-Hour vs. 2-Hour Training Sessions:</b><br><br>• <b>1 Hour Session (₹2,500 base):</b> Ideal for standard split training (e.g., Push day, Leg day). 45 mins intense lifting + 15 mins warm-up &amp; cool-down.<br>• <b>2 Hours Intensive (₹4,500 base):</b> Best for advanced hypertrophy or athletic prep. Includes compound strength, accessory isolation, PNF assisted stretching, and a nutrition/macro audit with your coach.<br>• <b>24 Hours VIP Pass (₹15,000 base):</b> Full-day dedicated coach access for VIP event preparation, photoshoot coaching, or full-day fitness retreats.";
+  }
+
+  if(q.includes('24hr') || q.includes('24 hour') || q.includes('vip')){
+    return "👑 <b>24-Hour VIP On-Demand Trainer Pass:</b><br><br>• <b>What it includes:</b> Dedicated full-day coaching tailored for high-profile clients, executives, and fitness enthusiasts.<br>• <b>Scope:</b> Multiple workout sessions throughout the day, form analysis, live meal prep oversight, recovery protocols, and full accountability.<br>• <b>Booking:</b> Select the <b>👑 24 Hours VIP Pass</b> option when scheduling any coach!";
+  }
+
   if(q.includes('protein') || q.includes('how much protein')){
     return "🥩 <b>Optimal Protein Intake Protocol:</b><br><br>• <b>Muscle Hypertrophy (Building Mass):</b> 1.6g to 2.2g of protein per kg of body weight daily (e.g., at 70kg body weight = ~115g to 150g protein/day).<br>• <b>Fat Loss &amp; Retention:</b> 2.0g to 2.4g/kg to prevent catabolism while in a deficit.<br>• <b>Top Whole Food Sources:</b> Eggs (6g/egg), Chicken breast (31g/100g), Paneer (18g/100g), Tofu (15g/100g), Soya chunks (52g/100g), Greek yogurt, and Whey Isolate (24g/scoop).";
   }
 
-  // 2. Workout Routines & Splits
   if(q.includes('split') || q.includes('4-day') || q.includes('4 day') || q.includes('routine')){
     return "🏋️ <b>Optimal 4-Day Upper / Lower Hypertrophy Split:</b><br><br>• <b>Day 1 (Upper Body Heavy):</b> Bench Press, Barbell Row, Overhead DB Press, Lat Pulldown, Tricep Dips (3-4 sets, 6-8 reps).<br>• <b>Day 2 (Lower Body Heavy):</b> Barbell Squats, Romanian Deadlifts, Bulgarian Split Squats, Standing Calf Raises (3-4 sets, 6-10 reps).<br>• <b>Day 3:</b> Active Recovery / Core.<br>• <b>Day 4 (Upper Hypertrophy):</b> Incline DB Press, Cable Rows, Lateral Raises, Bicep Curls, Face Pulls (3-4 sets, 10-12 reps).<br>• <b>Day 5 (Lower Hypertrophy):</b> Leg Press, Leg Curls, Walking Lunges, Seated Calves (3-4 sets, 10-15 reps).";
   }
 
-  // 3. Chest Workouts
   if(q.includes('chest') || q.includes('pec')){
     return "💪 <b>Chest Hypertrophy Mass Routine:</b><br><br>1. <b>Incline Dumbbell Press:</b> 3 sets × 8–10 reps (Upper clavicular head)<br>2. <b>Flat Barbell Bench Press:</b> 3 sets × 6–8 reps (Mid-mass &amp; strength)<br>3. <b>Cable Flyes / Pec Deck:</b> 3 sets × 12–15 reps (Peak contraction)<br>4. <b>Bodyweight / Weighted Dips:</b> 2 sets to technical failure.<br><br>💡 <i>Key cue: Retract and depress your scapulae before pressing!</i>";
   }
 
-  // 4. Back Workouts
-  if(q.includes('back') || q.includes('lat') || q.includes('deadlift')){
-    return "🦅 <b>V-Taper Back Building Routine:</b><br><br>1. <b>Deadlifts / Barbell Bent-over Rows:</b> 3 sets × 6–8 reps (Back thickness)<br>2. <b>Wide-Grip Lat Pulldowns:</b> 3 sets × 10–12 reps (Lat width)<br>3. <b>Seated Cable Rows (Neutral Grip):</b> 3 sets × 10–12 reps (Mid-traps &amp; rhomboids)<br>4. <b>Single-Arm Dumbbell Rows:</b> 2 sets × 12 reps each side.<br>5. <b>Face Pulls:</b> 3 sets × 15 reps (Rear delts &amp; shoulder posture).";
-  }
-
-  // 5. Fat Loss & Belly Fat
   if(q.includes('fat loss') || q.includes('lose fat') || q.includes('belly fat') || q.includes('cut')){
     return "🔥 <b>Evidence-Based Fat Loss Protocol:</b><br><br>1. <b>Sustainable Calorie Deficit:</b> Eat 300–500 kcal below your Maintenance TDEE.<br>2. <b>Protein Anchor:</b> Keep protein high (1.8g–2.0g per kg) to protect lean muscle.<br>3. <b>Progressive Lifting:</b> Lift weights 3–4 days/week to signal to your body to burn fat, not muscle.<br>4. <b>Daily Step Count:</b> Aim for 8,000–10,000 steps daily (High NEAT burns more fat than cardio).<br><br>💡 <i>Note: Spot reduction is scientifically impossible. Fat comes off evenly as your total body fat decreases.</i>";
   }
 
-  // 6. Pre and Post Workout Nutrition
-  if(q.includes('before workout') || q.includes('pre workout') || q.includes('post workout') || q.includes('after workout')){
-    return "🍌 <b>Pre &amp; Post Workout Nutrition Guide:</b><br><br>• <b>Pre-Workout (60–90 min before):</b> Fast-acting carbs + light protein (e.g., 1 banana + black coffee or 40g oats with 1/2 scoop whey). Avoid heavy fats before lifting.<br>• <b>Post-Workout (within 60 min):</b> 25g–35g fast-digesting protein + carbs to restore glycogen (e.g., 1 scoop Whey Protein + 1 banana or 150g grilled chicken/paneer with white rice).<br>💧 Drink 500ml water with a pinch of pink salt for electrolyte balance.";
-  }
-
-  // 7. Creatine Protocol
   if(q.includes('creatine')){
     return "⚡ <b>Creatine Monohydrate Master Protocol:</b><br><br>• <b>Dosage:</b> 3g to 5g taken daily at any consistent time.<br>• <b>Loading Phase:</b> Optional. Taking 5g daily will fully saturate muscle phosphocreatine within 3–4 weeks without stomach distress.<br>• <b>Benefits:</b> Boosts ATP synthesis, increases strength on heavy compounds by 5–15%, and enhances intracellular muscle hydration.<br>💧 <b>Crucial:</b> Drink at least 3.5 to 4 liters of water daily.";
   }
 
-  // 8. Trainer Recommendations
-  if(q.includes('trainer') || q.includes('coach') || q.includes('recommend') || q.includes('pt') || q.includes('book')){
-    return "🏆 <b>EliteTrainer Coach Matchmaker:</b><br><br>• <b>For Celebrity Transformations &amp; Heavy Mass:</b> Book <b>Aarav Rao</b> (ACE Certified, 12+ Yrs Exp).<br>• <b>For Rapid Fat Loss, HIIT &amp; Nutrition:</b> Book <b>Neha Shah</b> (K11 Master Trainer).<br>• <b>For Pro Athletic Performance &amp; Strength:</b> Book <b>Sameer Sen</b> (CSCS Certified Coach).<br><br>👉 Tap the <b>Coaches</b> tab to choose your trainer, pick your date (Days 1–30), and reserve your slot with 10% Escrow Protection!";
-  }
-
-  // 9. 10% Escrow & Payment questions
-  if(q.includes('escrow') || q.includes('10%') || q.includes('pay') || q.includes('safe') || q.includes('money')){
-    return "🛡️ <b>10% Client Escrow Protection:</b><br><br>When you book a session on EliteTrainer:<br>1. Your deposit is kept in a secure holding escrow.<br>2. The personal trainer only receives their 90% payout after your workout session is safely delivered.<br>3. If a trainer cancels or misses a session, your payment is 100% refunded immediately. Zero risk!";
-  }
-
-  // Default Fitness Coaching Fallback
-  return "💪 <b>Elite Fitness AI Coaching Tip:</b><br><br>To build lean muscle and burn fat efficiently:<br>• Ensure you apply <b>Progressive Overload</b> (increasing weight or reps each week).<br>• Prioritize 7 to 8 hours of deep sleep to maximize testosterone and growth hormone release.<br>• Stay in your target calorie range daily.<br><br>What specific muscle group, workout split, or diet plan would you like help with?";
+  return "💪 <b>Elite Fitness AI Coaching Tip:</b><br><br>To build lean muscle and burn fat efficiently:<br>• Ensure you apply <b>Progressive Overload</b> (increasing weight or reps each week).<br>• Prioritize 7 to 8 hours of deep sleep to maximize testosterone and growth hormone release.<br>• Choose between 1hr, 2hr, or 24hr sessions based on your intensity and recovery needs.<br><br>What specific exercise, workout split, or diet plan would you like help with?";
 }
 
 /* ==============================================================
-   6. DEVELOPER EXCLUSIVE: MANAGE PTS & 10% COMMISSIONS
+   6. DEVELOPER EXCLUSIVE: LIVE SESSION MONITOR & CLIENT LOGS
    ============================================================== */
 function renderDeveloper(){
   let totalGross = 0;
@@ -1176,16 +1488,68 @@ function renderDeveloper(){
   document.getElementById('admTotalVolume').textContent = '₹' + totalGross.toLocaleString('en-IN');
   document.getElementById('admTrainerPayouts').textContent = '₹' + totalTrainer.toLocaleString('en-IN');
 
+  // 1. Live Sessions & Bookings Monitor
+  document.getElementById('devBookingsCount').textContent = `${bookingHistory.length} Bookings`;
+  const bookingsCont = document.getElementById('devBookingsList');
+
+  if(!bookingHistory.length){
+    bookingsCont.innerHTML = `<div class="card" style="font-size:12px;color:var(--text-muted);text-align:center">No active bookings yet.</div>`;
+  } else {
+    bookingsCont.innerHTML = bookingHistory.map((b, idx) => `
+      <div class="card" style="margin-bottom:10px;border-left:4px solid ${b.status.includes('Running') ? '#10b981' : (b.status.includes('Completed') ? '#6366f1' : '#f59e0b')}">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <b style="font-size:13px">${b.clientName} → ${b.trainer}</b>
+          <span class="badge" style="${b.status.includes('Running') ? 'background:#064e3b;color:#4ade80' : 'background:#1e1b4b;color:#c7d2fe'}">${b.status}</span>
+        </div>
+        <div class="breakdown-row"><span>Duration:</span><b>${b.duration}</b></div>
+        <div class="breakdown-row"><span>Slot:</span><b>${b.slot}</b></div>
+        <div class="breakdown-row"><span>Contact:</span><b>${b.clientPhone || b.clientEmail}</b></div>
+        <div class="breakdown-row"><span>Total Paid:</span><b>₹${b.amount.toLocaleString('en-IN')} (Your 10%: ₹${b.platformFee.toLocaleString('en-IN')})</b></div>
+        
+        <div style="display:flex;gap:6px;margin-top:10px">
+          ${!b.status.includes('Running') && !b.status.includes('Completed') ? `
+            <button class="btn btn-sm btn-primary" onclick="setSessionStatus(${idx}, 'Running Now 🟢')">▶ Start Session (Running)</button>
+          ` : ''}
+          ${!b.status.includes('Completed') ? `
+            <button class="btn btn-sm btn-success" onclick="setSessionStatus(${idx}, 'Completed ✓')">✓ Complete & Release 90% Payout</button>
+          ` : '<span style="font-size:11px;color:var(--accent-green);font-weight:700">✓ Session Finished & Payout Released</span>'}
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // 2. Registered Clients Directory
+  document.getElementById('devClientsCount').textContent = `${registeredClients.length} Registered`;
+  const clientsCont = document.getElementById('devClientsList');
+  clientsCont.innerHTML = registeredClients.map(c => `
+    <div class="card" style="display:flex;justify-content:space-between;align-items:center;padding:10px">
+      <div>
+        <b>${c.name}</b>
+        <div style="font-size:11px;color:var(--text-muted)">${c.email} · ${c.phone || ''}</div>
+        <div style="font-size:10px;color:#a5b4fc">Goal: ${c.goal}</div>
+      </div>
+      <span class="badge" style="background:#1e1b4b;color:#c7d2fe">${c.joined || 'Registered'}</span>
+    </div>
+  `).join('');
+
+  // 3. PT Roster
   const container = document.getElementById('devPTList');
   container.innerHTML = trainers.map((t, idx) => `
     <div class="card" style="display:flex;justify-content:space-between;align-items:center">
       <div>
         <b>${t.name}</b>
-        <div style="font-size:11px;color:var(--text-muted)">Rate: ₹${t.rate.toLocaleString('en-IN')} · ${t.meta}</div>
+        <div style="font-size:11px;color:var(--text-muted)">1-Hr Rate: ₹${t.rate.toLocaleString('en-IN')} · ${t.meta}</div>
       </div>
       <button class="btn btn-danger btn-sm" onclick="removeTrainer('${t.id}')">🗑️ Remove</button>
     </div>
   `).join('');
+}
+
+function setSessionStatus(idx, newStatus){
+  bookingHistory[idx].status = newStatus;
+  localStorage.setItem('et_booking_history', JSON.stringify(bookingHistory));
+  renderDeveloper();
+  toast(`Session marked as ${newStatus}`);
 }
 
 function openAddTrainerModal(){
