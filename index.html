@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
- <link rel="manifest" href="manifest.json">
 <meta charset="utf-8">
+<link rel="manifest" href="manifest.json">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>EliteTrainer — Unified App</title>
 <style>
-*{box-sizing:border-box}
+/* CSS STYLES GO HERE */
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 body{margin:0;background:#09090b;color:#fff;font-family:Arial,sans-serif}
 button,input{font:inherit}
 .app{max-width:430px;margin:auto;min-height:100vh;background:#121216;padding-bottom:82px}
 header{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29292f}
 .logo{font-weight:800;letter-spacing:1.5px}.muted{color:#999;font-size:12px;line-height:1.5}
 .screen{display:none}.screen.active{display:block}
-.pad{padding:0 20px}.top{padding:20px;color:#aaa}
+.pad{padding:0 20px}
+.top{padding:20px;color:#aaa;display:flex;justify-content:space-between;align-items:center}
 .hero{padding:28px 20px}.hero h1{font-size:34px;line-height:1.05;margin:0 0 12px}
 .search,.field{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:14px;color:#999;margin-top:15px}
 .chips{display:flex;gap:8px;overflow:auto;padding:0 20px 18px}.chip{white-space:nowrap;border:1px solid #303038;border-radius:20px;padding:9px 12px;font-size:11px}
 .section{font-size:18px;font-weight:800;margin:22px 0 11px}
 .card,.heroCard{background:#1b1b20;border:1px solid #2d2d34;border-radius:16px;padding:15px;margin:10px 0}
-.trainer{display:flex;gap:12px}.avatar{width:70px;height:70px;border-radius:15px;background:#29292f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.trainer{display:flex;gap:12px}.avatar{width:70px;height:70px;border-radius:15px;background:#29292f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0}
 .grow{flex:1}.name{font-size:16px;font-weight:800}.tag,.badge{display:inline-block;background:#25252b;border:1px solid #34343b;border-radius:8px;padding:6px 8px;font-size:10px;margin:7px 4px 0 0}
 .btn{width:100%;padding:13px;border:0;border-radius:11px;background:#fff;color:#111;font-weight:800;margin-top:13px;cursor:pointer}
 .btn.dark{background:#25252b;color:#fff;border:1px solid #3a3a42}
@@ -33,7 +35,11 @@ header{padding:18px 20px;display:flex;justify-content:space-between;align-items:
 .success{text-align:center;padding:35px 20px}.check{width:68px;height:68px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:32px;margin:auto auto 16px}
 .note{background:#1b1b20;border-radius:14px;padding:14px;color:#bbb;font-size:12px;line-height:1.5}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{display:block;font-size:24px}.stat span{display:block;color:#999;font-size:11px;margin-top:6px}
-.client{background:#1b1b20;border:1px solid #2d2d34;border-radius:15px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}.client .avatar{width:52px;height:52px}.client .info{flex:1}.progress{margin-top:8px;height:5px;background:#303038;border-radius:8px;overflow:hidden}.fill{height:100%;background:#fff}.open{background:#fff;color:#111;border:0;border-radius:9px;padding:9px 10px;font-weight:800;font-size:10px}
+.client{background:#1b1b20;border:1px solid #2d2d34;border-radius:15px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}
+.client .avatar{width:52px;height:52px;flex-shrink:0}
+.client .info{flex:1;display:flex;flex-direction:column;gap:3px}
+.progress{margin-top:8px;height:5px;background:#303038;border-radius:8px;overflow:hidden}.fill{height:100%;background:#fff}
+.open{background:#fff;color:#111;border:0;border-radius:9px;padding:9px 10px;font-weight:800;font-size:10px;cursor:pointer}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action{background:#1b1b20;border:1px solid #2d2d34;border-radius:14px;padding:16px;font-size:13px}.action span{display:block;color:#999;font-size:10px;margin-top:6px}
 .cover{height:190px;background:linear-gradient(135deg,#4b4b52,#18181c);display:flex;align-items:end;padding:20px}.profileAvatar{width:86px;height:86px;border-radius:18px;background:#29292e;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold}
 .profileContent{padding:20px}.profileName{font-size:26px;font-weight:800}.profileMeta{color:#aaa;font-size:13px;margin:8px 0 18px}.profileStats{display:flex;gap:8px}.profileStat{flex:1;background:#1b1b20;border-radius:12px;padding:14px;text-align:center}.profileStat b{display:block;font-size:19px}.profileStat span{font-size:10px;color:#999}
@@ -100,9 +106,24 @@ nav button{background:none;border:0;color:#999;font-size:10px;cursor:pointer}nav
 <div class="trainer"><div class="avatar">AR</div><div><div class="name">Aarav Rao ✓</div><div class="muted">Certified · Elite Experience · 4.9 ★</div></div></div>
 <div class="title">Choose your session</div><div class="section">Package</div>
 <div class="option selected"><b>1-on-1 Personal Training</b><div class="muted">12 sessions · ₹30,000</div></div><div class="option"><b>Premium Transformation</b><div class="muted">24 sessions · ₹54,000</div></div>
-<div class="section">Date</div><div class="dates"><div class="date selected">08<br>Tue</div><div class="date">09<br>Wed</div><div class="date">10<br>Thu</div><div class="date">11<br>Fri</div><div class="date">12<br>Sat</div></div>
-<div class="section">Available time</div><div class="times"><div class="time">6:00 AM</div><div class="time selected">7:00 AM</div><div class="time">8:00 AM</div><div class="time">5:00 PM</div><div class="time">6:00 PM</div><div class="time">7:00 PM</div></div>
-<div class="card"><b>Booking Summary</b><div class="row"><span>Trainer</span><b>Aarav Rao</b></div><div class="row"><span>Session</span><b>1-on-1</b></div><div class="row"><span>Date &amp; time</span><b>08 · 7:00 AM</b></div><div class="row"><span>Total</span><b>₹2,500</b></div><button class="btn" onclick="show('payment')">CONFIRM &amp; CONTINUE TO PAYMENT</button></div>
+<div class="section">Date</div>
+<div class="dates">
+  <div class="date selected">08<br>Tue</div>
+  <div class="date">09<br>Wed</div>
+  <div class="date">10<br>Thu</div>
+  <div class="date">11<br>Fri</div>
+  <div class="date">12<br>Sat</div>
+</div>
+<div class="section">Available time</div>
+<div class="times">
+  <div class="time">6:00 AM</div>
+  <div class="time selected">7:00 AM</div>
+  <div class="time">8:00 AM</div>
+  <div class="time">5:00 PM</div>
+  <div class="time">6:00 PM</div>
+  <div class="time">7:00 PM</div>
+</div>
+<div class="card"><b>Booking Summary</b><div class="row"><span>Trainer</span><b>Aarav Rao</b></div><div class="row"><span>Session</span><b>1-on-1</b></div><div class="row" id="summaryRow"><span>Date &amp; time</span><b id="summaryDateTime">08 Tue · 7:00 AM</b></div><div class="row"><span>Total</span><b>₹2,500</b></div><button class="btn" onclick="show('payment')">CONFIRM &amp; CONTINUE TO PAYMENT</button></div>
 </div></section>
 
 <section id="payment" class="screen"><div class="pad"><div class="top">EliteTrainer</div><div class="title">Secure Checkout</div>
@@ -143,6 +164,7 @@ nav button{background:none;border:0;color:#999;font-size:10px;cursor:pointer}nav
 </div>
 
 <script>
+/* JAVASCRIPT LOGIC GOES HERE */
 function show(id){
  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
  document.getElementById(id).classList.add('active');
@@ -157,6 +179,36 @@ function clientForm(){return `<div class="field">Full name</div><div class="fiel
 function trainerForm(){return `<div class="field">Full name / Professional name</div><div class="field">Email address</div><div class="field">Mobile number</div><div class="field">Create password</div><div class="section">Professional Details</div><div class="field">Years of experience</div><div class="field">Specializations</div><div class="field">Certifications</div><div class="section">Verification</div><div class="upload">＋ Upload certification documents<br>＋ Add professional credentials</div><div class="field">Celebrity / Elite training experience (optional)</div><button class="btn" onclick="show('trainer')">SUBMIT FOR VERIFICATION</button>`}
 function approve(){toast('Trainer verified ✓ — badge approved');}
 function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+
+// Interactive Date and Time selection
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.date').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.date').forEach(d => d.classList.remove('selected'));
+      el.classList.add('selected');
+      updateSummary();
+    });
+  });
+
+  document.querySelectorAll('.time').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('.time').forEach(t => t.classList.remove('selected'));
+      el.classList.add('selected');
+      updateSummary();
+    });
+  });
+});
+
+function updateSummary() {
+  const selDate = document.querySelector('.date.selected');
+  const selTime = document.querySelector('.time.selected');
+  const summaryEl = document.getElementById('summaryDateTime');
+  if (selDate && selTime && summaryEl) {
+    const day = selDate.innerText.replace('\n', ' ');
+    summaryEl.textContent = day + ' · ' + selTime.textContent;
+  }
+}
+
 setRole('client');
 </script>
 </body>
