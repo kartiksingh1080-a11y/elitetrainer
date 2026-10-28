@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>EliteTrainer — Unified App</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#09090b;color:#fff;font-family:Arial,sans-serif}
+button,input{font:inherit}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#121216;padding-bottom:82px}
+header{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #29292f}
+.logo{font-weight:800;letter-spacing:1.5px}.muted{color:#999;font-size:12px;line-height:1.5}
+.screen{display:none}.screen.active{display:block}
+.pad{padding:0 20px}.top{padding:20px;color:#aaa}
+.hero{padding:28px 20px}.hero h1{font-size:34px;line-height:1.05;margin:0 0 12px}
+.search,.field{width:100%;background:#1b1b20;border:1px solid #303038;border-radius:13px;padding:14px;color:#999;margin-top:15px}
+.chips{display:flex;gap:8px;overflow:auto;padding:0 20px 18px}.chip{white-space:nowrap;border:1px solid #303038;border-radius:20px;padding:9px 12px;font-size:11px}
+.section{font-size:18px;font-weight:800;margin:22px 0 11px}
+.card,.heroCard{background:#1b1b20;border:1px solid #2d2d34;border-radius:16px;padding:15px;margin:10px 0}
+.trainer{display:flex;gap:12px}.avatar{width:70px;height:70px;border-radius:15px;background:#29292f;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800}
+.grow{flex:1}.name{font-size:16px;font-weight:800}.tag,.badge{display:inline-block;background:#25252b;border:1px solid #34343b;border-radius:8px;padding:6px 8px;font-size:10px;margin:7px 4px 0 0}
+.btn{width:100%;padding:13px;border:0;border-radius:11px;background:#fff;color:#111;font-weight:800;margin-top:13px;cursor:pointer}
+.btn.dark{background:#25252b;color:#fff;border:1px solid #3a3a42}
+.title{font-size:28px;font-weight:800;margin:24px 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric,.stat{background:#1b1b20;border:1px solid #2d2d34;border-radius:14px;padding:14px}
+.metric b{display:block;font-size:20px;margin-top:7px}.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #303038;color:#aaa;font-size:12px}.row b{color:#fff;text-align:right}
+.option{background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:14px;margin:8px 0;cursor:pointer}.option.selected{border-color:#fff}
+.dates{display:flex;gap:8px;overflow:auto}.date{min-width:60px;text-align:center;background:#1b1b20;border:1px solid #303038;border-radius:12px;padding:11px 6px;font-size:11px;cursor:pointer}.date.selected{background:#fff;color:#111}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.time{padding:11px 5px;text-align:center;border:1px solid #303038;border-radius:10px;font-size:12px;background:#1b1b20;cursor:pointer}.time.selected{background:#fff;color:#111}
+.success{text-align:center;padding:35px 20px}.check{width:68px;height:68px;border-radius:50%;background:#fff;color:#111;display:flex;align-items:center;justify-content:center;font-size:32px;margin:auto auto 16px}
+.note{background:#1b1b20;border-radius:14px;padding:14px;color:#bbb;font-size:12px;line-height:1.5}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat b{display:block;font-size:24px}.stat span{display:block;color:#999;font-size:11px;margin-top:6px}
+.client{background:#1b1b20;border:1px solid #2d2d34;border-radius:15px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}.client .avatar{width:52px;height:52px}.client .info{flex:1}.progress{margin-top:8px;height:5px;background:#303038;border-radius:8px;overflow:hidden}.fill{height:100%;background:#fff}.open{background:#fff;color:#111;border:0;border-radius:9px;padding:9px 10px;font-weight:800;font-size:10px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.action{background:#1b1b20;border:1px solid #2d2d34;border-radius:14px;padding:16px;font-size:13px}.action span{display:block;color:#999;font-size:10px;margin-top:6px}
+.cover{height:190px;background:linear-gradient(135deg,#4b4b52,#18181c);display:flex;align-items:end;padding:20px}.profileAvatar{width:86px;height:86px;border-radius:18px;background:#29292e;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:bold}
+.profileContent{padding:20px}.profileName{font-size:26px;font-weight:800}.profileMeta{color:#aaa;font-size:13px;margin:8px 0 18px}.profileStats{display:flex;gap:8px}.profileStat{flex:1;background:#1b1b20;border-radius:12px;padding:14px;text-align:center}.profileStat b{display:block;font-size:19px}.profileStat span{font-size:10px;color:#999}
+.book{position:sticky;bottom:90px;margin:20px;padding:15px;background:#fff;color:#111;border:0;border-radius:13px;width:calc(100% - 40px);font-weight:800;font-size:15px;cursor:pointer}
+.rolebar{display:flex;background:#1b1b20;border-radius:12px;padding:4px;margin-bottom:18px}.role{flex:1;text-align:center;padding:10px;font-size:11px;color:#999;cursor:pointer;border-radius:9px}.role.active{background:#fff;color:#111;font-weight:800}
+.upload{border:1px dashed #444;border-radius:13px;padding:16px;color:#999;font-size:11px;text-align:center;margin-top:8px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);background:#17171b;border-top:1px solid #2b2b30;display:flex;justify-content:space-around;padding:11px 3px 14px;z-index:10}
+nav button{background:none;border:0;color:#999;font-size:10px;cursor:pointer}nav button.active{color:#fff;font-weight:800}
+.hidden{display:none}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#fff;color:#111;padding:12px 16px;border-radius:12px;font-size:12px;font-weight:700;z-index:20;display:none}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">ELITETRAINER</div><div class="muted">Premium Fitness Network</div></header>
+
+<section id="login" class="screen active">
+<div class="pad">
+<div style="padding-top:35px;color:#999;font-size:11px;letter-spacing:1px">WELCOME TO YOUR PREMIUM FITNESS NETWORK</div>
+<div class="title">Choose your<br>experience.</div>
+<div class="muted">Connect with verified personal trainers or build your professional trainer profile.</div>
+<div class="option" onclick="show('signup')">👤 &nbsp; <b>I'm a Client</b><div class="muted">Find &amp; book your personal trainer</div></div>
+<div class="option" onclick="show('signup')">🏋️ &nbsp; <b>I'm a Trainer</b><div class="muted">Build your profile &amp; manage clients</div></div>
+<div style="display:flex;align-items:center;gap:10px;color:#666;font-size:11px;margin:27px 0 16px"><span style="flex:1;height:1px;background:#2b2b31"></span>OR CONTINUE WITH<span style="flex:1;height:1px;background:#2b2b31"></span></div>
+<div class="field">✉ &nbsp; Email address</div><div class="field">● &nbsp; Password</div>
+<button class="btn" onclick="show('home')">LOGIN</button>
+<div style="text-align:center;color:#666;font-size:10px;margin-top:20px">🔒 Your account and personal data are protected</div>
+<div style="text-align:center;margin-top:15px"><button class="btn dark" onclick="show('signup')">CREATE ACCOUNT</button></div>
+</div></section>
+
+<section id="signup" class="screen">
+<div class="pad">
+<div class="top">‹ &nbsp; <span class="logo">ELITETRAINER</span> · Create Account</div>
+<div class="title">Build your EliteTrainer profile.</div>
+<div class="muted">Create an account and connect with the right fitness professionals.</div>
+<div class="rolebar"><div class="role active" id="clientRole" onclick="setRole('client')">CLIENT</div><div class="role" id="trainerRole" onclick="setRole('trainer')">TRAINER</div></div>
+<div id="signupForm"></div>
+<div style="font-size:10px;color:#666;text-align:center;margin-top:14px">By continuing, you agree to the app's Terms &amp; Privacy Policy.</div>
+</div></section>
+
+<section id="home" class="screen">
+<div class="hero"><h1>Find a trainer<br>who fits your goals.</h1><div class="muted">Connect with certified personal trainers and professionals with elite training experience.</div><div class="search" onclick="show('find')">⌕ &nbsp; Search trainer, specialty or goal</div></div>
+<div class="chips"><div class="chip">📍 Near me</div><div class="chip">🏅 Certified</div><div class="chip">⭐ Top rated</div><div class="chip">Online</div></div>
+<div class="pad"><div class="section">Featured Trainers</div>
+<div class="card trainer"><div class="avatar">AR</div><div class="grow"><div class="name">Aarav Rao ✓</div><div class="muted">Mumbai · 12+ years · 4.9 ★</div><span class="tag">Celebrity Training</span><span class="tag">Strength</span><button class="btn" onclick="show('profile')">VIEW PROFILE</button></div></div>
+</div></section>
+
+<section id="find" class="screen"><div class="pad"><div class="title">Find Trainers</div><div class="search">⌕ &nbsp; Search trainer, goal or specialty</div><div class="chips" style="padding:15px 0"><div class="chip">Certified</div><div class="chip">Celebrity</div><div class="chip">Budget</div><div class="chip">Online</div></div><div class="section">Top Matches</div>
+<div class="card trainer"><div class="avatar">AR</div><div class="grow"><div class="name">Aarav Rao ✓</div><div class="muted">Mumbai · Strength · Transformation</div><span class="tag">✓ Verified</span><span class="tag">12+ Years</span><button class="btn" onclick="show('profile')">VIEW PROFILE</button></div></div>
+<div class="card trainer"><div class="avatar">NS</div><div class="grow"><div class="name">Neha Shah ✓</div><div class="muted">Mumbai · Transformation · Nutrition</div><span class="tag">Certified</span><span class="tag">4.8 ★</span></div></div>
+</div></section>
+
+<section id="profile" class="screen"><div class="top">‹ &nbsp; Trainer Profile</div><div class="cover"><div class="profileAvatar">AR</div></div><div class="profileContent">
+<div class="profileName">Aarav Rao ✓</div><div class="profileMeta">Mumbai · 12+ years experience · 4.9 ★</div>
+<div><span class="badge">🏅 Certified</span><span class="badge">✓ Verified Trainer</span><span class="badge">⭐ Elite Experience</span></div>
+<div class="section">About</div><div class="muted">Premium personal trainer focused on strength, transformation and high-performance training. Personalized plans built around each client's goals.</div>
+<div class="section">Experience</div><div class="profileStats"><div class="profileStat"><b>12+</b><span>Years</span></div><div class="profileStat"><b>2K+</b><span>Sessions</span></div><div class="profileStat"><b>4.9</b><span>Rating</span></div></div>
+<div class="section">Specializations</div><div><span class="badge">Strength</span><span class="badge">Transformation</span><span class="badge">Performance</span><span class="badge">Celebrity Training</span></div>
+<div class="section">Packages</div><div class="option selected"><b>1-on-1 Personal Training</b><div class="muted">12 sessions · ₹30,000</div></div><div class="option"><b>Premium Transformation</b><div class="muted">24 sessions · ₹54,000</div></div>
+<div class="section">Reviews</div><div class="muted">★★★★★ &nbsp; “Professional, focused and completely personalized.”</div>
+</div><button class="book" onclick="show('booking')">BOOK A PERSONAL SESSION</button></section>
+
+<section id="booking" class="screen"><div class="pad"><div class="top">‹ &nbsp; Book Personal Training</div>
+<div class="trainer"><div class="avatar">AR</div><div><div class="name">Aarav Rao ✓</div><div class="muted">Certified · Elite Experience · 4.9 ★</div></div></div>
+<div class="title">Choose your session</div><div class="section">Package</div>
+<div class="option selected"><b>1-on-1 Personal Training</b><div class="muted">12 sessions · ₹30,000</div></div><div class="option"><b>Premium Transformation</b><div class="muted">24 sessions · ₹54,000</div></div>
+<div class="section">Date</div><div class="dates"><div class="date selected">08<br>Tue</div><div class="date">09<br>Wed</div><div class="date">10<br>Thu</div><div class="date">11<br>Fri</div><div class="date">12<br>Sat</div></div>
+<div class="section">Available time</div><div class="times"><div class="time">6:00 AM</div><div class="time selected">7:00 AM</div><div class="time">8:00 AM</div><div class="time">5:00 PM</div><div class="time">6:00 PM</div><div class="time">7:00 PM</div></div>
+<div class="card"><b>Booking Summary</b><div class="row"><span>Trainer</span><b>Aarav Rao</b></div><div class="row"><span>Session</span><b>1-on-1</b></div><div class="row"><span>Date &amp; time</span><b>08 · 7:00 AM</b></div><div class="row"><span>Total</span><b>₹2,500</b></div><button class="btn" onclick="show('payment')">CONFIRM &amp; CONTINUE TO PAYMENT</button></div>
+</div></section>
+
+<section id="payment" class="screen"><div class="pad"><div class="top">EliteTrainer</div><div class="title">Secure Checkout</div>
+<div class="card"><b>Booking Summary</b><div class="row"><span>Trainer</span><b>Aarav Rao ✓</b></div><div class="row"><span>Session</span><b>1-on-1 Personal Training</b></div><div class="row"><span>Date &amp; Time</span><b>08 · 7:00 AM</b></div><div class="row"><span>Package</span><b>12 Sessions</b></div><div class="row"><span>Total</span><b>₹2,500</b></div></div>
+<div class="card"><b>Payment Method</b><div class="option selected">▣ &nbsp; <b>UPI</b><div class="muted">Google Pay · PhonePe · Paytm</div></div><div class="option">▤ &nbsp; <b>Card</b><div class="muted">Credit / Debit Card</div></div></div>
+<button class="btn" onclick="show('confirmed')">PAY ₹2,500 &amp; CONFIRM BOOKING</button><div style="text-align:center;color:#666;font-size:10px;margin-top:15px">🔒 Secure payment · Your booking is protected</div>
+</div></section>
+
+<section id="confirmed" class="screen"><div class="success"><div class="check">✓</div><h1>Booking Confirmed</h1><div class="muted">Your session with <b style="color:#fff">Aarav Rao</b> is confirmed.<br>08 · 7:00 AM · 1-on-1 Personal Training</div></div>
+<div class="pad"><div class="card"><b>Added to My Board</b><div class="row"><span>Next Session</span><b>08 · 7:00 AM</b></div><div class="row"><span>Trainer</span><b>Aarav Rao</b></div><div class="row"><span>Status</span><b>Confirmed ✓</b></div></div><button class="btn" onclick="show('board')">OPEN MY CLIENT BOARD</button></div></section>
+
+<section id="board" class="screen"><div class="pad"><div class="title">My Client Board</div><div class="muted">Rahul · Private training dashboard</div>
+<div class="card"><b>Transformation Goal</b><div class="muted">Strength &amp; body transformation</div><div style="height:7px;background:#303038;border-radius:8px;margin-top:12px"><div style="height:100%;width:72%;background:#fff;border-radius:8px"></div></div><div class="muted" style="margin-top:7px">72% overall progress</div></div>
+<div class="grid"><div class="metric">🎯<b>Goals</b><span class="muted">3 active targets</span></div><div class="metric">🏋️<b>Workout</b><span class="muted">Today's plan</span></div><div class="metric">🍎<b>Nutrition</b><span class="muted">Daily plan</span></div><div class="metric">📊<b>Measurements</b><span class="muted">Track progress</span></div><div class="metric">📸<b>Progress Photos</b><span class="muted">Private timeline</span></div><div class="metric">🧠<b>Perception</b><span class="muted">Mindset &amp; habits</span></div></div>
+<div class="section">Trainer's Private Notes</div><div class="note">“Energy and consistency have improved. Keep focus on recovery and progressive overload this week.”<button class="btn" onclick="toast('Client board opened')">VIEW FULL CLIENT BOARD</button></div>
+<div class="section">Next Session</div><div class="note">Tomorrow · 7:00 PM<br><b style="color:#fff">1-on-1 Personal Training</b></div></div></section>
+
+<section id="trainer" class="screen"><div class="pad"><div class="top"><b>ELITETRAINER</b><span>Trainer Dashboard · ⚙</span></div><div class="muted">WELCOME BACK</div><div class="title" style="margin-top:5px">Aarav Rao 👋</div>
+<div class="stats"><div class="stat"><b>18</b><span>Active Clients</span></div><div class="stat"><b>7</b><span>Today's Sessions</span></div><div class="stat"><b>4.9 ★</b><span>Client Rating</span></div><div class="stat"><b>₹84K</b><span>This Month</span></div></div>
+<div class="section">Today's Clients</div>
+<div class="client"><div class="avatar">RK</div><div class="info"><b>Rahul Kapoor</b><span class="muted">Transformation · Next: 7:00 AM</span><div class="progress"><div class="fill" style="width:72%"></div></div></div><button class="open" onclick="show('board')">OPEN BOARD</button></div>
+<div class="client"><div class="avatar">AS</div><div class="info"><b>Ananya Shah</b><span class="muted">Strength · Next: 8:00 AM</span><div class="progress"><div class="fill" style="width:58%"></div></div></div><button class="open">OPEN BOARD</button></div>
+<div class="client"><div class="avatar">VK</div><div class="info"><b>Vikram Khanna</b><span class="muted">Performance · Next: 6:00 PM</span><div class="progress"><div class="fill" style="width:84%"></div></div></div><button class="open">OPEN BOARD</button></div>
+<div class="section">Quick Actions</div><div class="actions"><div class="action">➕ Add Client<span>Create a private client board</span></div><div class="action">📅 Schedule<span>Manage upcoming sessions</span></div><div class="action">📝 Update Board<span>Workout &amp; trainer notes</span></div><div class="action">💬 Messages<span>Chat with clients</span></div></div>
+</div></section>
+
+<section id="admin" class="screen"><div class="pad"><div class="title">Admin Verification</div><div class="muted">Review trainer applications before granting the Verified badge.</div><div class="card"><div class="name">Aarav Rao</div><span class="tag">PENDING REVIEW</span><div class="row"><span>Certification</span><b>Uploaded ✓</b></div><div class="row"><span>Experience</span><b>12+ years</b></div><div class="row"><span>Elite training</span><b>Claim submitted</b></div><button class="btn" onclick="approve()">APPROVE &amp; VERIFY</button><button class="btn dark" onclick="toast('Application marked for further review')">REQUEST MORE DOCUMENTS</button></div></div></section>
+
+<nav>
+<button onclick="show('home')">⌂<br>Home</button>
+<button onclick="show('find')">⌕<br>Find</button>
+<button onclick="show('booking')">◷<br>Bookings</button>
+<button onclick="show('board')">▣<br>My Board</button>
+<button onclick="show('trainer')">♙<br>Trainer</button>
+<button onclick="show('admin')">✓<br>Admin</button>
+</nav>
+<div id="toast" class="toast"></div>
+</div>
+
+<script>
+function show(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ window.scrollTo(0,0);
+}
+function setRole(r){
+ document.getElementById('clientRole').className='role '+(r==='client'?'active':'');
+ document.getElementById('trainerRole').className='role '+(r==='trainer'?'active':'');
+ document.getElementById('signupForm').innerHTML=r==='client'?clientForm():trainerForm();
+}
+function clientForm(){return `<div class="field">Full name</div><div class="field">Email address</div><div class="field">Mobile number</div><div class="field">Create password</div><div class="section">Your goals</div><div class="field">Choose your primary fitness goal</div><div class="section">Location</div><div class="field">City / area</div><button class="btn" onclick="show('home')">CREATE CLIENT ACCOUNT</button>`}
+function trainerForm(){return `<div class="field">Full name / Professional name</div><div class="field">Email address</div><div class="field">Mobile number</div><div class="field">Create password</div><div class="section">Professional Details</div><div class="field">Years of experience</div><div class="field">Specializations</div><div class="field">Certifications</div><div class="section">Verification</div><div class="upload">＋ Upload certification documents<br>＋ Add professional credentials</div><div class="field">Celebrity / Elite training experience (optional)</div><button class="btn" onclick="show('trainer')">SUBMIT FOR VERIFICATION</button>`}
+function approve(){toast('Trainer verified ✓ — badge approved');}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+setRole('client');
+</script>
+</body>
+</html>
